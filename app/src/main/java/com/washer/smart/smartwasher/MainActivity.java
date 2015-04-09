@@ -15,6 +15,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     //Test21324
+    //This is a branch comment
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
