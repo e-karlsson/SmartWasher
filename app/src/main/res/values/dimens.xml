@@ -2,4 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="bottom_nav_icon_size">35dp</dimen>
+    <dimen name="bottom_nav_text_size">14dp</dimen>
+    <dimen name="tv_home_status_size">22dp</dimen>
 </resources>
