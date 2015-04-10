@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import sdk.WasherService;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -12,10 +14,12 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        WasherService.init("http://kexdns.ddns.net", 8080);
+        new HTTPTest();
     }
 
     //Test21324
-    //This is a branch comment2
+    //This is a branch
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
