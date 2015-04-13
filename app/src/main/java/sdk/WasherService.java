@@ -1,8 +1,7 @@
 package sdk;
 
-import android.app.Activity;
-
 import model.LiveRecord;
+import model.Settings;
 import model.StartStatus;
 import model.Status;
 import model.WashRecords;
@@ -108,7 +107,7 @@ public class WasherService {
 
 
     /**
-     * Starts the device to bea ready at a specific time. Can give either lowPrice or useWind as extra command
+     * Starts the device to be ready at a specific time. Can give either lowPrice or useWind as extra command
      * @param time end time given in milli time since epoch
      * @param washTime program time given in minutes
      * @param lowPrice true if lowPrice setting is wanted
@@ -129,7 +128,40 @@ public class WasherService {
         };
     }
 
+    /**
+     * Sets the servers settings
+     * @param push true if user wants notifications
+     * @param reminderTime time before second reminder in minutes
+     * @param staticPrice true if user has static price
+     * @param price static price given in float
+     * @param callBack handling function for callback
+     */
+    public static void setSettings(boolean push, int reminderTime, boolean staticPrice, float price, CallBack<Status> callBack){
 
 
+        GetExecutor executor = new GetExecutor(baseUrl+"set/settings?push="+push+"&reminderTime="+reminderTime+"&static="+staticPrice+"&price="+price, callBack) {
+            @Override
+            public Object parse(String json) throws Exception {
+                Status status = GetExecutor.getMapper().readValue(json, Status.class);
+                return status;
+            }
+        };
+    }
+
+    /**
+     * Gets settings from server
+     * @param callBack handling function for callback
+     */
+    public static void getSettings(CallBack<Settings> callBack){
+
+
+        GetExecutor executor = new GetExecutor(baseUrl+"get/settings", callBack) {
+            @Override
+            public Object parse(String json) throws Exception {
+                Settings settings = GetExecutor.getMapper().readValue(json, Settings.class);
+                return settings;
+            }
+        };
+    }
 
 }

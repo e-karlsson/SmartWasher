@@ -1,5 +1,7 @@
 package com.washer.smart.smartwasher;
 
+
+import android.support.v4.app.FragmentManager;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -41,8 +43,6 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         WasherService.init("http://kexdns.ddns.net", 8080);
         new HTTPTest();
-
-        init();
     }
 
     private List<Fragment> createFragments(){
@@ -96,8 +96,4 @@ public class MainActivity extends FragmentActivity {
             }
         });
     }
-
-    //Test21324
-    //This is a branch
-
 }

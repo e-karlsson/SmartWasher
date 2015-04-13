@@ -3,21 +3,25 @@ package fragments;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.SparseArray;
+import android.view.ViewGroup;
 
 import java.util.List;
 
 /**
- * Created by xxkarlue on 2015-04-13.
+ * Created by xxottosl on 2015-04-13.
  */
 public class MyFragmentAdapter extends FragmentPagerAdapter {
-    private List<Fragment> fragments;
-    private static int position = 0;
 
-    public MyFragmentAdapter(FragmentManager fm, List<Fragment> fragments){
+    List<BaseFragment> fragments;
+
+    private static SparseArray<BaseFragment> initFragments = new SparseArray<>();
+
+    public MyFragmentAdapter(FragmentManager fm, List<BaseFragment> fragments){
         super(fm);
         this.fragments = fragments;
-
     }
+
 
     @Override
     public Fragment getItem(int position) {
@@ -29,11 +33,22 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
         return fragments.size();
     }
 
-    public static int getPosition(){
-        return position;
+
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        BaseFragment bf = (BaseFragment) super.instantiateItem(container, position);
+        initFragments.put(position, bf);
+        return bf;
     }
 
-    public static void setPosition(int position){
-        MyFragmentAdapter.position = position;
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        initFragments.remove(position);
+        super.destroyItem(container, position, object);
+    }
+
+    public static BaseFragment getFragment(int position){
+        return initFragments.get(position);
     }
 }
