@@ -1,5 +1,7 @@
 package com.washer.smart.smartwasher;
 
+
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +18,9 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         WasherService.init("http://kexdns.ddns.net", 8080);
         new HTTPTest();
+
+
+
     }
 
     //Test21324
