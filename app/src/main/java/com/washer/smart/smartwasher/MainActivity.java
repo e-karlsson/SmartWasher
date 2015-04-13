@@ -27,6 +27,7 @@ import fragments.BlueFragment;
 import fragments.GreenFragment;
 import fragments.HomeFragment;
 import fragments.MyFragmentAdapter;
+import fragments.MyViewPager;
 import fragments.RedFragment;
 import fragments.StartFragment;
 import sdk.WasherService;
@@ -34,7 +35,7 @@ import sdk.WasherService;
 
 public class MainActivity extends FragmentActivity {
 
-    ViewPager viewPager;
+    MyViewPager viewPager;
     PagerAdapter pagerAdapter;
 
     @Override
@@ -44,21 +45,24 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         WasherService.init("http://kexdns.ddns.net", 8080);
         new HTTPTest();
+        init();
     }
 
     private List<BaseFragment> createFragments(){
         ArrayList<BaseFragment> fragments = new ArrayList<>();
-
-        return null;
+        fragments.add(HomeFragment.create());
+        fragments.add(StartFragment.create());
+        return fragments;
     }
 
     public void init(){
         pagerAdapter = new MyFragmentAdapter(getSupportFragmentManager(), createFragments());
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (MyViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(pagerAdapter);
 
-        final TextView topBarTv = (TextView) findViewById(R.id.tv_top_title);
 
+        final TextView topBarTv = (TextView) findViewById(R.id.tv_top_title);
+        viewPager.setTitle(topBarTv);
         NavigationBar navbar = new NavigationBar();
 
         LinearLayout leftButton = (LinearLayout) findViewById(R.id.ll_nav_left);
@@ -69,7 +73,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void run() {
                 viewPager.setCurrentItem(0);
-                topBarTv.setText("HEM");
+
 
             }
         });
@@ -78,7 +82,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void run() {
                 viewPager.setCurrentItem(1);
-                topBarTv.setText("HISTORIK");
+
 
 
             }
