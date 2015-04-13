@@ -22,6 +22,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import fragments.BaseFragment;
 import fragments.BlueFragment;
 import fragments.GreenFragment;
 import fragments.HomeFragment;
@@ -45,13 +46,10 @@ public class MainActivity extends FragmentActivity {
         new HTTPTest();
     }
 
-    private List<Fragment> createFragments(){
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(new HomeFragment());
-        fragments.add(new StartFragment());
-        fragments.add(new BlueFragment());
+    private List<BaseFragment> createFragments(){
+        ArrayList<BaseFragment> fragments = new ArrayList<>();
 
-        return fragments;
+        return null;
     }
 
     public void init(){
