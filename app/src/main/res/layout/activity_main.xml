@@ -31,8 +31,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HEM"
-                android:id="@+id/textView2"
-                android:textSize="30dp"
+                android:id="@+id/tv_top_title"
+                android:textSize="@dimen/top_bar_text_title"
                 android:textColor="#fff"/>
         </LinearLayout>
         <LinearLayout
@@ -42,70 +42,20 @@
             android:layout_weight="1.5"></LinearLayout>
     </LinearLayout>
 
+        <!-- VIEWPAGER -->
 
-
-    <!-- CONTENT -->
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
+    <view
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context=".MainActivity"
-        android:orientation="vertical"
+        class="android.support.v4.view.ViewPager"
+        android:id="@+id/viewpager"
         android:layout_weight="75"
-        android:id="@+id/ll_content_parent"
-        android:weightSum="100"
-        android:background="@color/background">
+        android:layout_gravity="center_horizontal" />
 
-        <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="40"
-        android:gravity="center">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView"
-            android:src="@mipmap/wash_machine_running" />
-    </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
-            android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="AVSTÄNGD"
-            android:textSize="@dimen/tv_home_status_size"
-            android:id="@+id/tv_home_status"
-            android:textColor="@color/tieto_darkblue" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="50"
-            android:gravity="center">
-
-        </LinearLayout>
 
         <!-- BOTTOM NAV BAR -->
 
 
-
-    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -209,4 +159,6 @@
 
         </LinearLayout>
     </LinearLayout>
+
+
 </LinearLayout>

@@ -5,4 +5,8 @@
     <dimen name="bottom_nav_icon_size">35dp</dimen>
     <dimen name="bottom_nav_text_size">14dp</dimen>
     <dimen name="tv_home_status_size">22dp</dimen>
+    <dimen name="top_bar_text_title">25dp</dimen>
+    <dimen name="tv_start_param">20dp</dimen>
+    <dimen name="forward_arrow">30dp</dimen>
+    <dimen name="padding_left">10dp</dimen>
 </resources>
