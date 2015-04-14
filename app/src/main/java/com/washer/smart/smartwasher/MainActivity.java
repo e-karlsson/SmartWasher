@@ -8,11 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,14 +18,8 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-import fragments.BaseFragment;
-import fragments.BlueFragment;
-import fragments.GreenFragment;
-import fragments.HomeFragment;
-import fragments.MyFragmentAdapter;
-import fragments.MyViewPager;
-import fragments.RedFragment;
-import fragments.StartFragment;
+import extra.Storage;
+import fragments.*;
 import sdk.WasherService;
 
 
@@ -44,25 +34,32 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         WasherService.init("http://kexdns.ddns.net", 8080);
+        Storage.init(this);
         new HTTPTest();
         init();
     }
 
     private List<BaseFragment> createFragments(){
         ArrayList<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(HomeFragment.create());
+        fragments.add(HomeSleepFragment.create());
+        fragments.add(HomeScheduleFragment.create());
+        fragments.add(HomeWashingFragment.create());
+        fragments.add(HomeDoneFragment.create());
         fragments.add(StartFragment.create());
+        fragments.add(ProgramFragment.create());
+        fragments.add(HistoryFragment.create());
+        fragments.add(SettingsFragment.create());
         return fragments;
     }
 
     public void init(){
+        final TextView topBarTv = (TextView) findViewById(R.id.tv_top_title);
         pagerAdapter = new MyFragmentAdapter(getSupportFragmentManager(), createFragments());
+
         viewPager = (MyViewPager) findViewById(R.id.viewpager);
+        MyViewPager.init(viewPager, topBarTv);
         viewPager.setAdapter(pagerAdapter);
 
-
-        final TextView topBarTv = (TextView) findViewById(R.id.tv_top_title);
-        viewPager.setTitle(topBarTv);
         NavigationBar navbar = new NavigationBar();
 
         LinearLayout leftButton = (LinearLayout) findViewById(R.id.ll_nav_left);
@@ -92,7 +89,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void run() {
                 viewPager.setCurrentItem(2);
-                topBarTv.setText("INSTÄLLNINGAR");
+
 
 
             }
