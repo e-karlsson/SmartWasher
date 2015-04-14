@@ -15,6 +15,11 @@ import com.washer.smart.smartwasher.R;
  */
 public class StartFragment extends BaseFragment {
 
+    @Override
+    protected void init(View view) {
+
+    }
+
     public static StartFragment create(){
         StartFragment fragment = new StartFragment();
         fragment.setArguments(createBundle(R.layout.layout_start_content, "START"));

@@ -12,6 +12,7 @@ public class Storage {
     private static Context context;
 
     private static final String savePath = "washersave";
+    public static final String HISTORY_TIME_INDEX = "hti";
 
     public static void init(Context context){
         Storage.context = context;

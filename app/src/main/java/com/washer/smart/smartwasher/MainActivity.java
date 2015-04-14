@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -60,13 +61,23 @@ public class MainActivity extends FragmentActivity {
         MyViewPager.init(viewPager, topBarTv);
         viewPager.setAdapter(pagerAdapter);
 
-        NavigationBar navbar = new NavigationBar();
+        NavigationBar navbar = new NavigationBar() {
+            @Override
+            public void onActive(View v) {
+                v.setBackgroundColor(getResources().getColor(R.color.tieto_darkblue));
+            }
+
+            @Override
+            public void onInactive(View v) {
+                v.setBackgroundColor(getResources().getColor(R.color.tieto_green));
+            }
+        };
 
         LinearLayout leftButton = (LinearLayout) findViewById(R.id.ll_nav_left);
         LinearLayout centerButton = (LinearLayout) findViewById(R.id.ll_nav_center);
         LinearLayout rightButton = (LinearLayout) findViewById(R.id.ll_nav_right);
 
-        navbar.addButton(this, leftButton, new Runnable() {
+        navbar.addView(leftButton, new Runnable() {
             @Override
             public void run() {
                 viewPager.setCurrentItem(0);
@@ -75,22 +86,21 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-        navbar.addButton(this, centerButton, new Runnable() {
+        navbar.addView(centerButton, new Runnable() {
             @Override
             public void run() {
-                viewPager.setCurrentItem(1);
+                MyViewPager.getInstance().setCurrentItem(MyViewPager.HISTORY);
+
 
 
 
             }
         });
 
-        navbar.addButton(this, rightButton, new Runnable() {
+        navbar.addView(rightButton, new Runnable() {
             @Override
             public void run() {
-                viewPager.setCurrentItem(2);
-
-
+                MyViewPager.getInstance().setCurrentItem(MyViewPager.SETTINGS);
 
             }
         });

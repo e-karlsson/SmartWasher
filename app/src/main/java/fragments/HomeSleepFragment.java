@@ -1,5 +1,7 @@
 package fragments;
 
+import android.view.View;
+
 import com.washer.smart.smartwasher.R;
 
 /**
@@ -7,7 +9,10 @@ import com.washer.smart.smartwasher.R;
  */
 public class HomeSleepFragment extends BaseFragment {
 
+    @Override
+    protected void init(View view) {
 
+    }
 
     public static BaseFragment create() {
         HomeSleepFragment fragment = new HomeSleepFragment();

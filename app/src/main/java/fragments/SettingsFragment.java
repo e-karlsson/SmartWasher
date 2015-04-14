@@ -1,5 +1,7 @@
 package fragments;
 
+import android.view.View;
+
 import com.washer.smart.smartwasher.R;
 
 /**
@@ -11,8 +13,12 @@ public class SettingsFragment extends BaseFragment {
 
     public static BaseFragment create() {
         SettingsFragment fragment = new SettingsFragment();
-        fragment.setArguments(createBundle(R.layout.layout_home_content, "HEM"));
+        fragment.setArguments(createBundle(R.layout.layout_settings_content, "INSTÄLLNINGAR"));
         return fragment;
     }
 
+    @Override
+    protected void init(View view) {
+
+    }
 }

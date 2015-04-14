@@ -1,5 +1,7 @@
 package fragments;
 
+import android.view.View;
+
 import com.washer.smart.smartwasher.R;
 
 /**
@@ -7,7 +9,10 @@ import com.washer.smart.smartwasher.R;
  */
 public class ProgramFragment extends BaseFragment {
 
+    @Override
+    protected void init(View view) {
 
+    }
 
     public static BaseFragment create() {
         ProgramFragment fragment = new ProgramFragment();

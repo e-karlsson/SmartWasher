@@ -15,7 +15,10 @@ import com.washer.smart.smartwasher.R;
  */
 public class HomeFragment extends BaseFragment {
 
+    @Override
+    protected void init(View view) {
 
+    }
 
     public static BaseFragment create() {
         HomeFragment fragment = new HomeFragment();

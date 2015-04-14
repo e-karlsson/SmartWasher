@@ -3,6 +3,8 @@
     <item name="tieto_green" type="color">#7FCD0D</item>
     <item name="tieto_orange" type="color">#FF9933</item>
     <item name="tieto_darkblue" type="color">#0081CA</item>
+
+    <item name="white" type="color">#FFFFFF</item>
     <item name="background" type="color">#FFFFFF</item>
     <item name="transparent" type="color">#00000000</item>
     <item name="button_text_color" type="color">#FFFFFF</item>

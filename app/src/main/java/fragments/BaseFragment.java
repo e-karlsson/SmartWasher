@@ -29,6 +29,7 @@ public abstract class BaseFragment extends Fragment {
         layoutId = bundle.getInt("layoutId");
         titleName = bundle.getString("title");
         View view = inflater.inflate(layoutId, container, false);
+        init(view);
         return view;
     }
 
@@ -37,7 +38,7 @@ public abstract class BaseFragment extends Fragment {
         return titleName;
     }
 
-
+    protected abstract void init(View view);
 
     protected static Bundle createBundle(int layoutId, String titleName){
         Bundle bundle = new Bundle();
