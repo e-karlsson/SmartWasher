@@ -24,7 +24,7 @@
         android:layout_height="0dp"
         android:layout_weight="10"
         android:weightSum="100"
-        android:background="@drawable/hej"
+        android:background="@drawable/all_around_stroke"
         android:padding="1dp">
 
         <LinearLayout
@@ -32,23 +32,26 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="50"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:id="@+id/ll_start_start_at">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="Starta kl."
-                android:background="@color/tieto_darkblue"
+                android:background="@color/tieto_green"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/tv_start_param"
-                android:gravity="center" />
+                android:gravity="center"
+                android:id="@+id/tv_start_start_at" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="50"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:id="@+id/ll_start_ready_at">
 
             <TextView
                 android:layout_width="fill_parent"
@@ -58,7 +61,8 @@
                 android:textColor="@color/tieto_darkblue"
 
                 android:textSize="@dimen/tv_start_param"
-                android:gravity="center" />
+                android:gravity="center"
+                android:id="@+id/tv_start_ready_at" />
         </LinearLayout>
 
     </LinearLayout>
@@ -77,15 +81,16 @@
         android:layout_height="0dp"
         android:layout_weight="10"
         android:weightSum="100"
-        android:background="@drawable/hej"
+        android:background="@drawable/all_around_stroke"
         android:padding="1dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:id="@+id/ll_start_time">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Klockan"
-            android:id="@+id/tv_start_clock" />
+            android:id="@+id/tv_start_time" />
     </LinearLayout>
 
     <!-- EMPTY -->
@@ -102,7 +107,7 @@
         android:layout_height="0dp"
         android:layout_weight="20"
         android:weightSum="2"
-        android:background="@drawable/hej"
+        android:background="@drawable/all_around_stroke"
         android:padding="1dp">
 
 
@@ -137,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New Switch"
-                    android:id="@+id/sw_billigast"
+                    android:id="@+id/sw_start_cheapest"
                     android:checked="false"/>
             </LinearLayout>
         </LinearLayout>
@@ -172,7 +177,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New Switch"
-                    android:id="@+id/sw_vindkraft"
+                    android:id="@+id/sw_start_wind"
                     android:checked="false"/>
             </LinearLayout>
         </LinearLayout>
@@ -192,10 +197,10 @@
         android:layout_height="0dp"
         android:layout_weight="10"
         android:weightSum="10"
-        android:background="@drawable/hej"
+        android:background="@drawable/all_around_stroke"
         android:paddingLeft="@dimen/padding_left"
         android:gravity="center_vertical"
-        >
+        android:id="@+id/ll_start_choose_program">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="0dp"
@@ -207,7 +212,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Välj tvättprogram"
-                android:textSize="@dimen/tv_start_param"/>
+                android:textSize="@dimen/tv_start_param"
+                android:id="@+id/tv_start_program" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -215,13 +221,46 @@
             android:layout_height="fill_parent"
             android:layout_weight="2"
             android:gravity="center"
-            >
+            android:id="@+id/ll_start_program_arrow">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=">"
                 android:textSize="@dimen/forward_arrow"/>
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:background="@drawable/all_around_stroke"
+        android:gravity="center_vertical"
+        android:padding="1dp"
+        android:id="@+id/ll_start_start_button">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:background="@color/tieto_green">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STARTA"
+                android:textSize="@dimen/button_text_size"
+                android:textColor="@color/button_text_color" />
+        </LinearLayout>
+
     </LinearLayout>
 
 
