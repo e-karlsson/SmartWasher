@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <!-- CONTENT -->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="0dp"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context=".MainActivity"
+        android:orientation="vertical"
+        android:id="@+id/ll_content_parent"
+        android:weightSum="100"
+        android:background="@color/background">
+
+    <!-- Tabs (Vecka, månad, år) weight: 5 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:weightSum="3"
+        android:background="@drawable/all_around_stroke"
+        android:padding="1dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:id="@+id/ll_history_tab_week">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Vecka"
+                android:background="@color/tieto_darkblue"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/tv_history_tabs"
+                android:gravity="center"
+                android:id="@+id/tv_history_week" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:id="@+id/ll_history_tab_month">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Månad"
+                android:background="#ffffff"
+                android:textColor="@color/tieto_darkblue"
+
+                android:textSize="@dimen/tv_history_tabs"
+                android:gravity="center"
+                android:id="@+id/tv_history_month" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:id="@+id/ll_history_tab_year">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="År"
+                android:background="#ffffff"
+                android:textColor="@color/tieto_darkblue"
+
+                android:textSize="@dimen/tv_history_tabs"
+                android:gravity="center"
+                android:id="@+id/tv_history_year" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!-- Current values weight: 15-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:weightSum="2"
+        android:background="@drawable/all_around_stroke"
+        android:padding="1dp"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="870 W"
+                android:id="@+id/tv_history_total_watt"
+                android:textSize="@dimen/history_current_value"/>
+            </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="58 Kr"
+                android:id="@+id/tv_history_total_cost"
+                android:textSize="@dimen/history_current_value"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!-- EMPTY weight: 5 -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"></LinearLayout>
+
+    <!-- Tabs (Graf, Data) weight:5-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:weightSum="2"
+        android:background="@drawable/all_around_stroke"
+        android:padding="1dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:id="@+id/ll_history_tab_graf">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Graf"
+                android:background="@color/tieto_darkblue"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/tv_history_tabs"
+                android:gravity="center"
+                android:id="@+id/tv_history_graph" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Data"
+                android:background="#ffffff"
+                android:textColor="@color/tieto_darkblue"
+
+                android:textSize="@dimen/tv_history_tabs"
+                android:gravity="center"
+                android:id="@+id/tv_history_data" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="70"
+        android:id="@+id/sv_history"
+        android:layout_gravity="center_horizontal" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/ll_history_sv"></LinearLayout>
+    </ScrollView>
+
+    <!-- Grafer -->
+
+
+</LinearLayout>
