@@ -108,7 +108,8 @@
         android:layout_weight="20"
         android:weightSum="2"
         android:background="@drawable/all_around_stroke"
-        android:padding="1dp">
+        android:padding="1dp"
+        android:id="@+id/ll_extra_params">
 
 
         <LinearLayout
@@ -240,7 +241,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="15"
         android:background="@drawable/all_around_stroke"
         android:gravity="center_vertical"
         android:padding="1dp"

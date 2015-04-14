@@ -12,7 +12,11 @@ public class Storage {
     private static Context context;
 
     private static final String savePath = "washersave";
-    public static final String HISTORY_TIME_INDEX = "hti";
+    public static final String REMINDER_TIME = "remindertime";
+    public static final String STATIC_PRICE = "staticprice";
+    public static final String NOTIFY_STATE = "notifystate";
+    public static final String IS_STATIC = "isstatic";
+
 
     public static void init(Context context){
         Storage.context = context;
@@ -23,6 +27,13 @@ public class Storage {
         SharedPreferences prefs = context.getSharedPreferences(savePath, 0);
 
         return prefs.getInt(name, defValue);
+
+    }
+
+    public static float loadFloat(String name, float defValue){
+        SharedPreferences prefs = context.getSharedPreferences(savePath, 0);
+
+        return prefs.getFloat(name, defValue);
 
     }
 
@@ -44,6 +55,15 @@ public class Storage {
 
         editor.putInt(name, saveValue);
         Log.d("SAVED INT: "+name,""+saveValue);
+        editor.commit();
+    }
+
+    public static void saveFloat(String name, float saveValue){
+        SharedPreferences prefs = context.getSharedPreferences(savePath, 0);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.putFloat(name, saveValue);
+        Log.d("SAVED FLOAT: "+name,""+saveValue);
         editor.commit();
     }
 

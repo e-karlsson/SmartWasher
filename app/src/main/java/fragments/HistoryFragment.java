@@ -1,16 +1,9 @@
 package fragments;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.washer.smart.smartwasher.NavigationBar;
 import com.washer.smart.smartwasher.R;
-
-import org.w3c.dom.Text;
 
 import extra.Storage;
 
@@ -24,7 +17,7 @@ public class HistoryFragment extends BaseFragment {
 
 
     protected void init(View v){
-        topTabBar = NavigationBar.blueWhiteToggle(v);
+        topTabBar = NavigationBar.greenWhiteToggle(v);
 
         topTabBar.addView(v.findViewById(R.id.tv_history_week), new Runnable() {
             @Override
@@ -47,7 +40,7 @@ public class HistoryFragment extends BaseFragment {
             }
         });
 
-        graphDataBar = NavigationBar.blueWhiteToggle(v);
+        graphDataBar = NavigationBar.greenWhiteToggle(v);
 
         graphDataBar.addView(v.findViewById(R.id.tv_history_graph), new Runnable() {
             @Override
@@ -67,17 +60,15 @@ public class HistoryFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        int timeId = Storage.loadInt(Storage.HISTORY_TIME_INDEX, 0);
-        if(topTabBar != null)
-            topTabBar.setActive(timeId);
-
+        topTabBar.loadState("TimeBar");
+        graphDataBar.loadState("GraphData");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        int timeId = topTabBar.getSelectedId();
-        Storage.saveInt(Storage.HISTORY_TIME_INDEX, timeId);
+        topTabBar.saveState("TimeBar");
+        topTabBar.saveState("GraphData");
     }
 
     public static BaseFragment create() {

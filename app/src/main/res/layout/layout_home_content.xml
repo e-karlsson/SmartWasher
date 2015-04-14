@@ -48,13 +48,72 @@
         </LinearLayout>
 
 
-        <LinearLayout
+    <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="50"
-            android:gravity="center">
+            android:gravity="center"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:background="@drawable/all_around_stroke"
+            android:gravity="center_vertical"
+            android:padding="1dp"
+            android:id="@+id/ll_home_sleep_start" >
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@color/tieto_green" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="STARTA NU"
+                    android:textSize="@dimen/button_text_size"
+                    android:textColor="@color/button_text_color" />
+            </LinearLayout>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:background="@drawable/all_around_stroke"
+            android:gravity="center_vertical"
+            android:padding="1dp"
+            android:id="@+id/ll_home_sleep_schedule" >
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@color/tieto_green" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SCHEMALÄGG"
+                    android:textSize="@dimen/button_text_size"
+                    android:textColor="@color/button_text_color" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

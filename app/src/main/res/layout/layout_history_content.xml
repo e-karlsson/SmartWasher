@@ -19,10 +19,16 @@
 
     <!-- Tabs (Vecka, månad, år) weight: 5 -->
     <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4" />
+
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="8"
         android:weightSum="3"
         android:background="@drawable/all_around_stroke"
         android:padding="1dp">
@@ -39,7 +45,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="Vecka"
-                android:background="@color/tieto_darkblue"
+                android:background="@color/tieto_green"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/tv_history_tabs"
                 android:gravity="center"
@@ -136,14 +142,14 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"></LinearLayout>
+        android:layout_weight="4"></LinearLayout>
 
     <!-- Tabs (Graf, Data) weight:5-->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="8"
         android:weightSum="2"
         android:background="@drawable/all_around_stroke"
         android:padding="1dp">
@@ -160,7 +166,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="Graf"
-                android:background="@color/tieto_darkblue"
+                android:background="@color/tieto_green"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/tv_history_tabs"
                 android:gravity="center"
@@ -193,7 +199,8 @@
         android:layout_height="0dp"
         android:layout_weight="70"
         android:id="@+id/sv_history"
-        android:layout_gravity="center_horizontal" >
+        android:layout_gravity="center_horizontal"
+        android:fillViewport="false">
 
         <LinearLayout
             android:orientation="vertical"
