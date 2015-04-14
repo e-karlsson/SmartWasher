@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+
+        android:layout_width="fill_parent"
+        android:layout_height="64dp"
+        android:text="Välj datum och tid"
+        android:gravity="center"
+
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:background="@color/tieto_green"
+        android:contentDescription="@string/app_name" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="100">
+
+
+        <NumberPicker
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/np_picker_day"
+            android:layout_gravity="center_vertical"
+
+            android:layout_weight="50"></NumberPicker>
+        <NumberPicker
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/np_picker_hour"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="20"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textSize="20dp"/>
+        <NumberPicker
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/np_picker_minute"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="20"/>
+    </LinearLayout>
+</LinearLayout>

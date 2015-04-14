@@ -12,10 +12,19 @@ public class Storage {
     private static Context context;
 
     private static final String savePath = "washersave";
+    //settings
     public static final String REMINDER_TIME = "remindertime";
     public static final String STATIC_PRICE = "staticprice";
     public static final String NOTIFY_STATE = "notifystate";
     public static final String IS_STATIC = "isstatic";
+
+    //start
+    public static final String CHEAP_PRICE = "cheapPrice";
+    public static final String USE_WIND = "useWind";
+    public static final String LAST_DEGREE_STRING = "lastDegreeString";
+    public static final String LAST_DEGREE_ID = "lastDegreeID";
+    public static final String LAST_PROGRAM_STRING = "lastProgramString";
+    public static final String LAST_PROGRAM_ID = "lastProgramID";
 
 
     public static void init(Context context){
