@@ -42,7 +42,8 @@
                 android:background="@color/tieto_darkblue"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/tv_history_tabs"
-                android:gravity="center" />
+                android:gravity="center"
+                android:id="@+id/tv_history_week" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -60,7 +61,8 @@
                 android:textColor="@color/tieto_darkblue"
 
                 android:textSize="@dimen/tv_history_tabs"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:id="@+id/tv_history_month" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -79,7 +81,7 @@
 
                 android:textSize="@dimen/tv_history_tabs"
                 android:gravity="center"
-                android:id="@+id/tab_year" />
+                android:id="@+id/tv_history_year" />
         </LinearLayout>
 
     </LinearLayout>
@@ -107,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="870 W"
-                android:id="@+id/tv_history_current_w"
+                android:id="@+id/tv_history_total_watt"
                 android:textSize="@dimen/history_current_value"/>
             </LinearLayout>
 
@@ -122,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="58 Kr"
-                android:id="@+id/tv_history_current_kr"
+                android:id="@+id/tv_history_total_cost"
                 android:textSize="@dimen/history_current_value"/>
         </LinearLayout>
 
@@ -161,7 +163,8 @@
                 android:background="@color/tieto_darkblue"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/tv_history_tabs"
-                android:gravity="center" />
+                android:gravity="center"
+                android:id="@+id/tv_history_graph" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -179,7 +182,7 @@
 
                 android:textSize="@dimen/tv_history_tabs"
                 android:gravity="center"
-                android:id="@+id/ll_history_tab_data" />
+                android:id="@+id/tv_history_data" />
         </LinearLayout>
 
 

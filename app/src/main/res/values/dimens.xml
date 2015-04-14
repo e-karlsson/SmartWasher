@@ -11,4 +11,6 @@
     <dimen name="forward_arrow">30dp</dimen>
     <dimen name="padding_left">10dp</dimen>
     <dimen name="history_current_value">30dp</dimen>
+    <dimen name="wash_program_choices">25dp</dimen>
+    <dimen name="button_text_size">35dp</dimen>
 </resources>

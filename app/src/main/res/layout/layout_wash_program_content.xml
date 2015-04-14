@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <!-- CONTENT -->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context=".MainActivity"
+        android:orientation="vertical"
+        android:id="@+id/ll_content_parent"
+        android:weightSum="100"
+        android:background="@color/background">
+
+    <!-- Prisavtal -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:weightSum="10"
+        android:background="@drawable/all_around_stroke"
+        android:paddingLeft="@dimen/padding_left"
+        android:gravity="center_vertical"
+        >
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical|center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Senast använda tvättprogram"
+                android:textSize="@dimen/tv_start_param"
+                android:textColor="@color/tieto_darkblue"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:weightSum="10"
+        android:background="@drawable/all_around_stroke"
+        android:paddingLeft="@dimen/padding_left"
+        android:gravity="center_vertical"
+        android:id="@+id/ll_recent_1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bomull"
+                android:textSize="@dimen/wash_program_choices"
+                android:textColor="#000"
+                android:id="@+id/textView4" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:weightSum="10"
+        android:background="@drawable/all_around_stroke"
+        android:paddingLeft="@dimen/padding_left"
+        android:gravity="center_vertical"
+        android:id="@+id/ll_recent_2">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vit/Kulör"
+                android:textSize="@dimen/wash_program_choices"
+                android:textColor="#000"
+                android:id="@+id/textView5" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:weightSum="10"
+        android:paddingLeft="@dimen/padding_left"
+        android:gravity="center_vertical"
+        android:background="@color/transparent">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:weightSum="10"
+        android:background="@drawable/all_around_stroke"
+        android:paddingLeft="@dimen/padding_left"
+        android:gravity="center_vertical" >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical|center_horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alla tvättprogram"
+                android:textSize="@dimen/tv_start_param"
+                android:textColor="@color/tieto_darkblue"
+                android:id="@+id/textView7" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:weightSum="10"
+        android:background="@drawable/all_around_stroke"
+        android:paddingLeft="@dimen/padding_left"
+        android:gravity="center_vertical"
+        android:id="@+id/ll_program_cotton">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bomull"
+                android:textSize="@dimen/wash_program_choices"
+                android:textColor="#000" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:weightSum="10"
+        android:background="@drawable/all_around_stroke"
+        android:paddingLeft="@dimen/padding_left"
+        android:gravity="center_vertical"
+        android:id="@+id/ll_program_colors">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vit/Kulör"
+                android:textSize="@dimen/wash_program_choices"
+                android:textColor="#000"
+                android:id="@+id/textView6" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:weightSum="10"
+        android:background="@drawable/all_around_stroke"
+        android:paddingLeft="@dimen/padding_left"
+        android:gravity="center_vertical"
+        android:id="@+id/ll_program_fast">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Snabbtvätt"
+                android:textSize="@dimen/wash_program_choices"
+                android:textColor="#000"
+                android:id="@+id/textView8" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:weightSum="10"
+        android:paddingLeft="@dimen/padding_left"
+        android:gravity="center_vertical"
+        android:background="@color/transparent" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:weightSum="10"
+        android:background="@drawable/all_around_stroke"
+        android:paddingLeft="@dimen/padding_left"
+        android:gravity="center_vertical" >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical|center_horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Antal grader"
+                android:textSize="@dimen/tv_start_param"
+                android:textColor="@color/tieto_darkblue"
+                android:id="@+id/textView9" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:weightSum="3"
+        android:background="@drawable/all_around_stroke">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:id="@+id/ll_degree_30">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30°C"
+                    android:textSize="@dimen/wash_program_choices"
+                    android:textColor="#000"
+                    android:id="@+id/textView10" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:id="@+id/ll_degree_40">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_gravity="center_horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="40°C"
+                    android:textSize="@dimen/wash_program_choices"
+                    android:textColor="#000"
+                    android:id="@+id/textView11" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:id="@+id/ll_degree_60">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_gravity="center_horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="60°C"
+                    android:textSize="@dimen/wash_program_choices"
+                    android:textColor="#000"
+                    android:id="@+id/textView12" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!-- EMPTY -->
+
+
+    <!-- Notiser -->
+
+
+</LinearLayout>
