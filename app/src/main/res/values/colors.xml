@@ -9,6 +9,9 @@
     <item name="transparent" type="color">#00000000</item>
     <item name="button_text_color" type="color">#FFFFFF</item>
 
+    <item name="text_color_light_gray" type="color">#cecece</item>
+    <item name="text_color_dark_gray" type="color">#696969</item>
+
 
 
 </resources>

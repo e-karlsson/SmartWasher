@@ -1,36 +1,48 @@
 package fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.washer.smart.smartwasher.NavigationBar;
 import com.washer.smart.smartwasher.R;
 
+import java.util.Calendar;
+
+import dialogs.CustomDialog;
+import dialogs.WasherProgramDialog;
 import dialogs.WasherTimeDialog;
 import extra.Storage;
+import model.StartStatus;
+import sdk.CallBack;
+import sdk.WasherError;
+import sdk.WasherService;
 
 /**
  * Created by xxkarlue on 2015-04-13.
  */
 public class StartFragment extends BaseFragment {
 
+    long time = -1;
+    int dayIndex;
+    int hourIndex;
+    int minIndex;
+
+
+    String program;
+
     NavigationBar topStartBar;
     LinearLayout extraParams;
     LinearLayout startButton;
     LinearLayout startTimeLayout;
-    CharSequence[] programs = {"Bomull", "Vit/Kulör", "Snabbtvätt"};
-    CharSequence[] degrees = {"30 C", "40 C", "60 C"};
+    LinearLayout startChooseProgram;
+    TextView startTimeDescription, chooseProgramDescription, startTimeTitle;
     String programName = "Välj program";
     String degreeName = "Välj grader";
     Switch priceSwitch, windSwitch;
@@ -45,6 +57,19 @@ public class StartFragment extends BaseFragment {
         priceSwitch = (Switch) view.findViewById(R.id.sw_start_cheapest);
         windSwitch = (Switch) view.findViewById(R.id.sw_start_wind);
         startTimeLayout = (LinearLayout) view.findViewById(R.id.ll_start_time);
+        startChooseProgram = (LinearLayout) view.findViewById(R.id.ll_start_choose_program);
+        startTimeDescription = (TextView) view.findViewById(R.id.tv_start_time_description);
+        chooseProgramDescription = (TextView) view.findViewById(R.id.tv_start_program);
+        startTimeTitle = (TextView) view.findViewById(R.id.tv_start_time);
+
+        setCurrentTime();
+
+        startChooseProgram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseProgram();
+            }
+        });
 
         startTimeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,78 +121,146 @@ public class StartFragment extends BaseFragment {
 
     }
 
+    private void setCurrentTime(){
+        long currentTime =0;
+        int tempMin;
 
-    private void chooseProgram(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Välj program");
-        builder.setSingleChoiceItems(programs, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String selectedProgram = programs[which].toString();
-            }
-        });
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
+        Calendar rightNow = Calendar.getInstance();
 
-            }
-        });
+        currentTime = rightNow.getTimeInMillis();
 
-        builder.show();
+        tempMin = rightNow.get(Calendar.MINUTE);
+        tempMin = ((tempMin/5)+1)*5;
+
+        if(tempMin == 60){
+            tempMin = 0;
+            rightNow.add(Calendar.HOUR_OF_DAY, 1);
+        }
+        rightNow.set(Calendar.MINUTE, tempMin);
+
+        dayIndex = 0;
+        hourIndex = rightNow.get(Calendar.HOUR_OF_DAY);
+        minIndex = rightNow.get(Calendar.MINUTE);
+        startTimeDescription.setText("idag, kl. "+rightNow.get(Calendar.HOUR_OF_DAY)+":"+rightNow.get(Calendar.MINUTE));
+
+
+        time = currentTime;
     }
 
-    private void onStartClick(){}
+    private boolean validateFields(){
+        boolean isOK = true;
+        if(time<0){
+            startTimeDescription.setTextColor(getResources().getColor(R.color.tieto_orange));
+            startTimeTitle.setTextColor(getResources().getColor(R.color.tieto_orange));
+
+            isOK = false;
+        }
+        if(chooseProgramDescription.getText().toString().equals("Välj tvättprogram")){
+            chooseProgramDescription.setTextColor(getResources().getColor(R.color.tieto_orange));
+            isOK = false;
+        }
+
+        return isOK;
+    }
+
+    CallBack<StartStatus> callback = new CallBack<StartStatus>() {
+        @Override
+        public void onSuccess(StartStatus status) {
+            Log.d("hej", "Great! Will start server!");
+        }
+
+        @Override
+        public void onError(WasherError error) {
+            Log.d("hej", "Nope! Couldn't start server..");
+
+        }
+    };
+
+
+    private void onStartClick(){
+        if(validateFields() == false) return;
+
+        if(topStartBar.getSelectedId() == 0){
+            WasherService.startAt(time, 45, callback);
+        }else{
+            WasherService.startReadyAt(time, 45, priceSwitch.isChecked(), windSwitch.isChecked(), callback);
+        }
+
+        MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SCHEDULE,false);
+
+
+    }
 
 
 
 
+    private void chooseProgram(){
+        WasherProgramDialog wpd = new WasherProgramDialog(getActivity());
 
-    private void chooseDegree(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Välj grader");
-        builder.setSingleChoiceItems(degrees, -1, new DialogInterface.OnClickListener() {
+        wpd.bindOK(new CustomDialog.Callback() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String selectedDegrees = degrees[which].toString();
+            public void run(int[] ids, String[] tags) {
+                chooseProgramDescription.setText(tags[0] + " > " + tags[1] + "°C");
+                chooseProgramDescription.setTextColor(getResources().getColor(R.color.text_color_dark_gray));
+
             }
         });
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+        wpd.bindCancel(new Runnable() {
             @Override
-            public void onCancel(DialogInterface dialog) {
+            public void run() {
 
             }
         });
 
-        builder.show();
+        wpd.show();
     }
 
     public void chooseTime() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        // Get the layout inflater
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
-        builder.setView(inflater.inflate(R.layout.layout_washer_picker, null))
-                // Add action buttons
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        // sign in the user ...
-                        dialog.dismiss();
-                    }
-                })
-                .setNegativeButton("avbryt", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
-
-
-       // builder.show();
-
         WasherTimeDialog wtd = new WasherTimeDialog(getActivity());
+
+        wtd.bindOK(new CustomDialog.Callback() {
+            @Override
+            public void run(int[] ids, String[] tags) {
+                startTimeDescription.setText(tags[0]+", kl. "+tags[1]+":"+tags[2]);
+                dayIndex = ids[0];
+                hourIndex = ids[1];
+                minIndex = ids[2];
+
+                Log.d("hej", ids[0]+" "+ids[1]+" "+ids[2]);
+
+                Calendar rightNow = Calendar.getInstance();
+                long tempTime = rightNow.getTimeInMillis();
+
+                rightNow.add(Calendar.DATE, ids[0]);
+                rightNow.set(Calendar.HOUR_OF_DAY, ids[1]);
+                rightNow.set(Calendar.MINUTE, ids[2]*5);
+
+
+
+                time = rightNow.getTimeInMillis();
+
+                if((time-tempTime)<0){
+                    startTimeDescription.setTextColor(getResources().getColor(R.color.tieto_orange));
+                    time = -1;
+                }else{
+                    startTimeDescription.setTextColor(getResources().getColor(R.color.text_color_light_gray));
+                    startTimeTitle.setTextColor(getResources().getColor(R.color.text_color_light_gray));
+
+                }
+
+
+            }
+        });
+
+        wtd.bindCancel(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
         wtd.show();
+        wtd.setIds(dayIndex,hourIndex,minIndex);
     }
 
     private boolean useWind(){

@@ -3,6 +3,7 @@ package dialogs;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.NumberPicker;
 
@@ -11,7 +12,7 @@ import com.washer.smart.smartwasher.R;
 /**
  * Created by xxottosl on 2015-04-14.
  */
-public class WasherTimeDialog extends Dialog {
+public class WasherTimeDialog extends CustomDialog {
 
     NumberPicker minPicker, hourPicker, dayPicker;
 
@@ -19,11 +20,12 @@ public class WasherTimeDialog extends Dialog {
         super(context);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.layout_washer_picker);
+        setContentView(R.layout.layout_picker_time);
 
         minPicker = (NumberPicker) findViewById(R.id.np_picker_minute);
         hourPicker = (NumberPicker) findViewById(R.id.np_picker_hour);
@@ -32,6 +34,41 @@ public class WasherTimeDialog extends Dialog {
 
 
         initPickers();
+        initButtons();
+    }
+
+    private void initButtons(){
+        findViewById(R.id.tv_picker_time_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dismiss();
+
+                if(okCallback != null){
+                    int d = dayPicker.getValue();
+                    int h = hourPicker.getValue();
+                    int m = minPicker.getValue();
+
+                    String day = dayPicker.getDisplayedValues()[d];
+                    String hour = hourPicker.getDisplayedValues()[h];
+                    String min = minPicker.getDisplayedValues()[m];
+
+                    okCallback.run(new int[]{d,h,m}, new String[]{day, hour, min});
+                }
+
+            }
+        });
+
+        findViewById(R.id.tv_picker_time_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dismiss();
+
+                if(cancelFunction != null)
+                    cancelFunction.run();
+            }
+        });
     }
 
     private void initPickers(){
@@ -62,6 +99,17 @@ public class WasherTimeDialog extends Dialog {
         dayPicker.setMaxValue(days -1);
         dayPicker.setDisplayedValues(dayStrings);
 
+        dayPicker.setWrapSelectorWheel(false);
+        dayPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        hourPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        minPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+
+    }
+
+    public void setIds(int day, int hour, int min){
+        dayPicker.setValue(day);
+        hourPicker.setValue(hour);
+        minPicker.setValue(min);
     }
 
     private String[] generateDateStrings(){

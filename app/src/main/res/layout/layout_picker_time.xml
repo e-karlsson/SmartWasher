@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+
+        android:layout_width="fill_parent"
+        android:layout_height="64dp"
+        android:text="Välj datum och tid"
+        android:gravity="center"
+
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:background="@color/tieto_green"
+        android:contentDescription="@string/app_name" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="164dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:weightSum="100">
+
+
+        <NumberPicker
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/np_picker_day"
+            android:gravity="center_vertical"
+            android:layout_weight="50"
+            android:clickable="false"
+            android:focusable="false"></NumberPicker>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textSize="20dp"/>
+        <NumberPicker
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/np_picker_hour"
+
+            android:gravity="center_vertical"
+            android:layout_weight="20"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textSize="20dp"/>
+        <NumberPicker
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/np_picker_minute"
+            android:gravity="center_vertical"
+            android:layout_weight="20"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_color_light_gray"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:text="Avbryt"
+            android:textSize="@dimen/text_size_description"
+            android:id="@+id/tv_picker_time_cancel"
+        android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/text_color_light_gray"></LinearLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_description"
+            android:id="@+id/tv_picker_time_ok"
+            android:text="OK"/>
+
+
+        </LinearLayout>
+</LinearLayout>

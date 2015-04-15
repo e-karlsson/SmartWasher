@@ -16,17 +16,6 @@ public class HTTPTest {
 
     public HTTPTest(){
 
-        WasherService.startAt(-1, 45, new CallBack<StartStatus>() {
-            @Override
-            public void onSuccess(StartStatus startStatus) {
-
-            }
-
-            @Override
-            public void onError(WasherError error) {
-
-            }
-        });
 
     }
 
