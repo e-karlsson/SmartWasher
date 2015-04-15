@@ -43,6 +43,8 @@ public class HomeSleepFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startNow();
+
+
             }
         });
     }
@@ -74,6 +76,8 @@ public class HomeSleepFragment extends BaseFragment {
                     }
                 });
 
+                MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_WASHING, false);
+
             }
         });
 
@@ -85,6 +89,7 @@ public class HomeSleepFragment extends BaseFragment {
         });
 
         wpd.show();
+        wpd.setRightButton("Starta");
     }
 
 

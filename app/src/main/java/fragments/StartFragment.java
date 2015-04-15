@@ -18,6 +18,7 @@ import java.util.Calendar;
 import dialogs.CustomDialog;
 import dialogs.WasherProgramDialog;
 import dialogs.WasherTimeDialog;
+import extra.FontCache;
 import extra.Storage;
 import model.StartStatus;
 import sdk.CallBack;
@@ -51,6 +52,9 @@ public class StartFragment extends BaseFragment {
 
     @Override
     protected void init(View view) {
+        TextView startTimeFa = (TextView) view.findViewById(R.id.tv_start_time_fa);
+        FontCache.setCustomFont(startTimeFa, getResources().getString(R.string.fa), getActivity());
+        startTimeFa.setText("\u0f00");
         topStartBar = NavigationBar.greenWhiteToggle(view);
         extraParams = (LinearLayout) view.findViewById(R.id.ll_extra_params);
         startButton = (LinearLayout) view.findViewById(R.id.ll_start_start_button);
@@ -140,8 +144,10 @@ public class StartFragment extends BaseFragment {
 
         dayIndex = 0;
         hourIndex = rightNow.get(Calendar.HOUR_OF_DAY);
-        minIndex = rightNow.get(Calendar.MINUTE);
-        startTimeDescription.setText("idag, kl. "+rightNow.get(Calendar.HOUR_OF_DAY)+":"+rightNow.get(Calendar.MINUTE));
+        minIndex = rightNow.get(Calendar.MINUTE)/5;
+        String min = tempMin+"";
+        if(tempMin < 10) min = "0"+min;
+        startTimeDescription.setText("idag, kl. "+rightNow.get(Calendar.HOUR_OF_DAY)+":"+min);
 
 
         time = currentTime;

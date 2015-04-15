@@ -108,10 +108,10 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text=">"
+            android:text="@string/forward_arrow"
             android:layout_weight="2"
             android:gravity="center"
-            android:id="@+id/tv_start_time_font_awesome"
+            android:id="@+id/tv_start_time_fa"
             android:textSize="@dimen/forward_arrow" />
     </LinearLayout>
 

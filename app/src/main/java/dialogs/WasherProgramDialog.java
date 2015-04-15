@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 
 import com.washer.smart.smartwasher.R;
 
 import org.apache.http.auth.NTUserPrincipal;
+import org.w3c.dom.Text;
 
 /**
  * Created by xxottosl on 2015-04-15.
@@ -16,6 +18,7 @@ import org.apache.http.auth.NTUserPrincipal;
 public class WasherProgramDialog extends CustomDialog {
 
     NumberPicker programPicker, degreePicker;
+    TextView rightButtonTitle;
 
     public WasherProgramDialog(Context context) {
         super(context);
@@ -30,6 +33,7 @@ public class WasherProgramDialog extends CustomDialog {
 
         programPicker = (NumberPicker) findViewById(R.id.np_picker_program);
         degreePicker = (NumberPicker) findViewById(R.id.np_picker_degree);
+        rightButtonTitle = (TextView) findViewById(R.id.tv_picker_program_ok);
 
 
         initPickers();
@@ -68,6 +72,10 @@ public class WasherProgramDialog extends CustomDialog {
                     cancelFunction.run();
             }
         });
+    }
+
+    public void setRightButton(String title){
+        rightButtonTitle.setText(title);
     }
 
     private void initPickers(){
