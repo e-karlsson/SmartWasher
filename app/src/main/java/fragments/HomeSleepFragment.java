@@ -1,6 +1,7 @@
 package fragments;
 
 import android.util.Log;
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -11,6 +12,11 @@ import java.util.Calendar;
 import dialogs.CustomDialog;
 import dialogs.WasherProgramDialog;
 import model.StartStatus;
+import sdk.CallBack;
+import sdk.WasherError;
+import sdk.WasherService;
+
+import model.LiveRecord;
 import sdk.CallBack;
 import sdk.WasherError;
 import sdk.WasherService;
@@ -88,6 +94,37 @@ public class HomeSleepFragment extends BaseFragment {
         HomeSleepFragment fragment = new HomeSleepFragment();
         fragment.setArguments(createBundle(R.layout.layout_home_content, "HEM"));
         return fragment;
+    }
+
+
+    private class LiveFetch extends AsyncTask<String, String, String>{
+        @Override
+        protected String doInBackground(String... params) {
+
+            while(shown){
+
+                WasherService.getLiveRecord(new CallBack<LiveRecord>() {
+                    @Override
+                    public void onSuccess(LiveRecord liveRecord) {
+
+                    }
+
+                    @Override
+                    public void onError(WasherError error) {
+
+                    }
+                });
+
+
+                try {
+                    Thread.sleep(15000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
     }
 
 }

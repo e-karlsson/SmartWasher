@@ -17,6 +17,7 @@ public abstract class BaseFragment extends Fragment {
 
     private int layoutId;
     private String titleName;
+    protected boolean shown;
 
     public BaseFragment(){
 
@@ -51,6 +52,7 @@ public abstract class BaseFragment extends Fragment {
     public void onPause() {
         super.onPause();
         Log.d("Paused", titleName);
+        shown = false;
 
     }
 
@@ -58,5 +60,6 @@ public abstract class BaseFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.d("Resumed", titleName);
+        shown = true;
     }
 }
