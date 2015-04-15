@@ -95,8 +95,8 @@ public class WasherService {
      * @param washTime program time given in minutes
      * @param callBack handling function for callback
      */
-    public static void startAt(long time, int washTime, CallBack<StartStatus> callBack){
-        GetExecutor executor = new GetExecutor(baseUrl+"start?time="+time+"&washTime="+washTime, callBack) {
+    public static void startAt(long time, int washTime, String name, String degree, CallBack<StartStatus> callBack){
+        GetExecutor executor = new GetExecutor(baseUrl+"start?time="+time+"&washTime="+washTime+"&name="+name+"&degree="+degree, callBack) {
             @Override
             public Object parse(String json) throws Exception {
                 StartStatus status = GetExecutor.getMapper().readValue(json, StartStatus.class);
@@ -114,12 +114,12 @@ public class WasherService {
      * @param useWind true if user wants to use wind energy
      * @param callBack handling function for callback
      */
-    public static void startReadyAt(long time, int washTime, boolean lowPrice, boolean useWind, CallBack<StartStatus> callBack){
+    public static void startReadyAt(long time, int washTime, String name, String degree, boolean lowPrice, boolean useWind, CallBack<StartStatus> callBack){
         String extraParams = "";
         if(lowPrice) extraParams += "&lowPrice=true";
         if(useWind) extraParams += "&useWind=true";
 
-        GetExecutor executor = new GetExecutor(baseUrl+"start?readyAt="+time+"&washTime="+washTime+extraParams, callBack) {
+        GetExecutor executor = new GetExecutor(baseUrl+"start?readyAt="+time+"&washTime="+washTime+"&name="+name+"&degree="+degree+extraParams, callBack) {
             @Override
             public Object parse(String json) throws Exception {
                 StartStatus status = GetExecutor.getMapper().readValue(json, StartStatus.class);
@@ -160,6 +160,18 @@ public class WasherService {
             public Object parse(String json) throws Exception {
                 Settings settings = GetExecutor.getMapper().readValue(json, Settings.class);
                 return settings;
+            }
+        };
+    }
+
+
+    public static void setDone(CallBack<Status> callBack){
+
+        GetExecutor executor = new GetExecutor(baseUrl+"set/done", callBack) {
+            @Override
+            public Object parse(String json) throws Exception {
+                Status status = GetExecutor.getMapper().readValue(json, Status.class);
+                return status;
             }
         };
     }
