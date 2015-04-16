@@ -11,6 +11,10 @@
     <string name="history_icon">\uf1da</string>
     <string name="settings_icon">\uf013</string>
     <string name="back_icon">\uf053</string>
+    <string name="clock_icon">\uf017</string>
+    <string name="program_icon">\uf129</string>
+    <string name="money_icon">\uf0d6</string>
+    <string name="wind_icon">\uf06c</string>
 
 
 </resources>

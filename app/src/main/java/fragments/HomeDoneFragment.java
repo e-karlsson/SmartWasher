@@ -1,5 +1,6 @@
 package fragments;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -9,6 +10,11 @@ import com.washer.smart.smartwasher.R;
 import extra.Timer;
 import model.WashRecord;
 import model.WashRecords;
+import sdk.CallBack;
+import sdk.WasherError;
+import sdk.WasherService;
+
+import model.Status;
 import sdk.CallBack;
 import sdk.WasherError;
 import sdk.WasherService;
@@ -29,7 +35,17 @@ public class HomeDoneFragment extends BaseFragment {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SLEEP,false);
+                WasherService.setDone(new CallBack<Status>() {
+                    @Override
+                    public void onSuccess(Status status) {
+                        Log.d("Washer", "I've sent DONE.");
+                    }
+
+                    @Override
+                    public void onError(WasherError error) {
+                        Log.d("Washer", "Unsuccessfully sent DONE.");
+                    }
+                });
             }
         });
 
