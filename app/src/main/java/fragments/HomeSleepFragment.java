@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.washer.smart.smartwasher.R;
 
@@ -73,19 +74,19 @@ public class HomeSleepFragment extends BaseFragment {
                 Storage.saveInt(Storage.LAST_PROGRAM_ID, ids[0]);
                 Storage.saveInt(Storage.LAST_DEGREE_ID, ids[1]);
 
-                WasherService.startAt(currentTime, 45, programName, degreeName, new CallBack<StartStatus>() {
+                WasherService.startAt(currentTime, 1, programName, degreeName, new CallBack<StartStatus>() {
                     @Override
                     public void onSuccess(StartStatus startStatus) {
-                        Log.d("hej", "Great! Will start server!");
+                        MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_WASHING, false);
                     }
 
                     @Override
                     public void onError(WasherError error) {
-                        Log.d("hej", "Nope! Couldn't start server..");
+                        Toast.makeText(getActivity(), "Kunde inte ansluta till servern!", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
-                MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_WASHING, false);
 
             }
         });

@@ -55,7 +55,7 @@ public class Timer {
 
     }
 
-    private static String makeTwo(String digit){
+    public static String makeTwo(String digit){
         return (digit.length() == 1 ? "0"+digit : digit);
     }
 

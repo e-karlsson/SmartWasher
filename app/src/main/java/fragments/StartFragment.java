@@ -65,7 +65,7 @@ public class StartFragment extends BaseFragment {
         chooseProgramDescription = (TextView) view.findViewById(R.id.tv_start_program);
         startTimeTitle = (TextView) view.findViewById(R.id.tv_start_time);
 
-        setCurrentTime();
+
 
         startChooseProgram.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -315,7 +315,6 @@ public class StartFragment extends BaseFragment {
 
     @Override
     public void onResume() {
-        super.onResume();
         MenuBar.showBackButton();
         MenuBar.setBackAction(new Runnable() {
             @Override
@@ -325,6 +324,8 @@ public class StartFragment extends BaseFragment {
         });
         load();
         setProgram();
+        setCurrentTime();
+        super.onResume();
     }
 
     @Override

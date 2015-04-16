@@ -48,13 +48,15 @@ public class MyViewPager extends ViewPager {
 
     @Override
     public void setCurrentItem(int item) {
-        BaseFragment lastFragment = MyFragmentAdapter.getFragment(lastItem);
+
+        setCurrentItem(item, false);
+    /*    BaseFragment lastFragment = MyFragmentAdapter.getFragment(lastItem);
         lastFragment.onPause();      
         super.setCurrentItem(item);
         BaseFragment fragment = MyFragmentAdapter.getFragment(item);
         fragment.onResume();
         lastItem = item;
-        title.setText(fragment.getTitleName());
+        title.setText(fragment.getTitleName());*/
     }
 
     @Override
@@ -82,8 +84,13 @@ public class MyViewPager extends ViewPager {
     public static void changeHome(){
         int current = self.getCurrentItem();
         int homeItem = LiveData.getState();
-        if(current <= 3 && current != homeItem)
-            self.setCurrentItem(homeItem);
+        if(current <= 3){
+            if(current == homeItem){
+               MyFragmentAdapter.getFragment(current).update();
+            }else{
+                self.setCurrentItem(homeItem);
+            }
+        }
     }
 
     @Override

@@ -3,6 +3,7 @@ package fragments;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.washer.smart.smartwasher.R;
 
@@ -12,6 +13,7 @@ import java.util.Calendar;
 
 import extra.FontCache;
 import extra.LiveData;
+import extra.Timer;
 import model.LiveRecord;
 import model.StartStatus;
 import model.Status;
@@ -57,19 +59,20 @@ public class HomeScheduleFragment extends BaseFragment {
             public void onClick(View v) {
                 Calendar rightNow = Calendar.getInstance();
                 long currentTime = rightNow.getTimeInMillis();
+
                 WasherService.startAt(currentTime, 45, programName, degreeName, new CallBack<StartStatus>() {
                     @Override
                     public void onSuccess(StartStatus startStatus) {
-
+                        MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_WASHING,false);
                     }
 
                     @Override
                     public void onError(WasherError error) {
-
+                        Toast.makeText(getActivity(), "Kunde inte ansluta till servern!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
-                MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_WASHING,false);
+
 
             }
         });
@@ -80,23 +83,33 @@ public class HomeScheduleFragment extends BaseFragment {
                 WasherService.stop(new CallBack<Status>() {
                     @Override
                     public void onSuccess(Status status) {
-
+                        MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SLEEP,false);
                     }
 
                     @Override
                     public void onError(WasherError error) {
-
+                        Toast.makeText(getActivity(), "Kunde inte ansluta till servern!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
-                MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SLEEP,false);
+
             }
         });
 
         changeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyViewPager.getInstance().setCurrentItem(MyViewPager.START,false);
+                WasherService.stop(new CallBack<Status>() {
+                    @Override
+                    public void onSuccess(Status status) {
+                        MyViewPager.getInstance().setCurrentItem(MyViewPager.START,false);
+                    }
+
+                    @Override
+                    public void onError(WasherError error) {
+                        Toast.makeText(getActivity(), "Kunde inte ansluta till servern!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -104,43 +117,46 @@ public class HomeScheduleFragment extends BaseFragment {
     }
 
     private void updateInfo(){
-        WasherService.getLiveRecord(new CallBack<LiveRecord>() {
-            @Override
-            public void onSuccess(LiveRecord liveRecord) {
-                startTime = liveRecord.getProgramInfo().getStartTime();
-                programName = liveRecord.getProgramInfo().getName();
-                degreeName = liveRecord.getProgramInfo().getDegree();
-                wind = liveRecord.getProgramInfo().isWind();
-                cheapest = liveRecord.getProgramInfo().isLowPrice();
+            LiveRecord liveRecord = LiveData.getLiveRecord();
 
-                programNameText.setText(programName);
-                degreeNameText.setText(degreeName);
-
-                if(wind){
-                    extraName.setText("Vindkraft");
-                    extraIcon.setText(getResources().getText(R.string.wind_icon));
-                }else if(cheapest){
-                    extraName.setText("Billigast el");
-                    extraIcon.setText(getResources().getText(R.string.money_icon));
-
-                }else{
-                    extraName.setText("");
-                    extraIcon.setText("");
-                }
+            if(liveRecord == null){
+                return;
             }
 
-            @Override
-            public void onError(WasherError error) {
+            startTime = liveRecord.getProgramInfo().getStartTime();
+            programName = liveRecord.getProgramInfo().getName();
+            degreeName = liveRecord.getProgramInfo().getDegree();
+            wind = liveRecord.getProgramInfo().isWind();
+            cheapest = liveRecord.getProgramInfo().isLowPrice();
 
+            Timer.TimeInfo timeInfo = Timer.translate(startTime);
+
+            startTimeText.setText(""+timeInfo.getHour()+":"+timeInfo.getMinute());
+            programNameText.setText(programName);
+            degreeNameText.setText(degreeName);
+
+            if(wind){
+                extraName.setText("Vindkraft");
+                extraIcon.setText(getResources().getText(R.string.wind_icon));
+            }else if(cheapest){
+                extraName.setText("Billigast el");
+                extraIcon.setText(getResources().getText(R.string.money_icon));
+
+            }else{
+                extraName.setText("");
+                extraIcon.setText("");
             }
-        });
-
 
     }
 
     @Override
     public void onResume() {
+        updateInfo();
         super.onResume();
+    }
+
+    @Override
+    public void update() {
         updateInfo();
     }
 

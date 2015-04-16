@@ -62,4 +62,9 @@ public abstract class BaseFragment extends Fragment {
         Log.d("Resumed", titleName);
         shown = true;
     }
+
+    public void update(){
+
+    }
+
 }
