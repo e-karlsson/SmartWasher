@@ -5,16 +5,16 @@ package model;
  */
 public class LiveRecord {
 
-    float timeLeft;
-    float energy;
-    boolean isRunning;
+  int state;
+  float energy;
+  ProgramInfo programInfo;
 
-    public float getTimeLeft() {
-        return timeLeft;
+    public int getState() {
+        return state;
     }
 
-    public void setTimeLeft(float timeLeft) {
-        this.timeLeft = timeLeft;
+    public void setState(int state) {
+        this.state = state;
     }
 
     public float getEnergy() {
@@ -25,11 +25,11 @@ public class LiveRecord {
         this.energy = energy;
     }
 
-    public boolean isRunning() {
-        return isRunning;
+    public ProgramInfo getProgramInfo() {
+        return programInfo;
     }
 
-    public void setRunning(boolean isRunning) {
-        this.isRunning = isRunning;
+    public void setProgramInfo(ProgramInfo programInfo) {
+        this.programInfo = programInfo;
     }
 }

@@ -12,6 +12,15 @@ public class WashRecord {
     float totalEnergy;
     float price;
     List<EnergyPoint> points;
+    ProgramInfo programInfo;
+
+    public ProgramInfo getProgramInfo() {
+        return programInfo;
+    }
+
+    public void setProgramInfo(ProgramInfo programInfo) {
+        this.programInfo = programInfo;
+    }
 
     public long getEndTime() {
         return endTime;
