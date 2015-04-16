@@ -307,7 +307,7 @@ public class StartFragment extends BaseFragment {
     private void load(){
         topStartBar.loadState("StartTopBar");
         programName = Storage.loadString(Storage.LAST_PROGRAM_STRING, "Välj program");
-        degreeName = Storage.loadString(Storage.LAST_DEGREE_STRING,"Välj grader");
+        degreeName = Storage.loadString(Storage.LAST_DEGREE_STRING,"");
         priceSwitch.setChecked(Storage.loadBoolean(Storage.CHEAP_PRICE, false));
         windSwitch.setChecked(Storage.loadBoolean(Storage.USE_WIND, false));
     }
