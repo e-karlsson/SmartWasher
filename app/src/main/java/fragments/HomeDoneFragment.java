@@ -65,10 +65,32 @@ public class HomeDoneFragment extends BaseFragment {
             public void onSuccess(WashRecords washRecords) {
 
                 WashRecord record = washRecords.getRecords().get(0);
-                if(record == null) return;
+                if (record == null) return;
 
                 Timer.TimeInfo timeInfo = Timer.translate(record.getProgramInfo().getEndTime());
 
+                float energy = record.getTotalEnergy();
+                float price = record.getPrice();
+                boolean wind = record.getProgramInfo().isWind();
+                boolean lowPrice = record.getProgramInfo().isLowPrice();
+
+                if (!wind && !lowPrice) {
+                    extraTitle.setVisibility(View.INVISIBLE);
+                    extraText.setText("");
+                } else {
+                    extraTitle.setVisibility(View.VISIBLE);
+                }
+
+                if (wind) extraText.setText("Vindkraft");
+                if (lowPrice) extraText.setText("Billigast el");
+
+                endText.setText(timeInfo.getHour() + ":" + timeInfo.getMinute());
+
+                wattText.setText(energy / 1000 / 3600 + " kWh");
+
+                float totalPrice = energy * price / 1000 / 3600;
+
+                priceText.setText(totalPrice + " öre");
 
 
                 infoContainer.setVisibility(View.VISIBLE);
@@ -76,9 +98,16 @@ public class HomeDoneFragment extends BaseFragment {
 
             @Override
             public void onError(WasherError error) {
-
+                Log.d("ERROR", error.getReason());
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        updateInfo();
+        super.onResume();
+
     }
 
     public static BaseFragment create() {
