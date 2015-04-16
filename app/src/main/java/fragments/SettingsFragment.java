@@ -1,7 +1,9 @@
 package fragments;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -36,12 +38,19 @@ public class SettingsFragment extends BaseFragment {
         setNotification = (LinearLayout) view.findViewById(R.id.ll_settings_time_to_remember);
         setTime = (EditText) view.findViewById(R.id.et_settings_reminder_time);
 
+        final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+
+
+
         priceNavBar.addView(view.findViewById(R.id.tv_settings_variable), new Runnable() {
             @Override
             public void run() {
 
                 addPrice.setVisibility(View.INVISIBLE);
                 setPrice.setEnabled(false);
+                imm.hideSoftInputFromWindow(setPrice.getWindowToken(), 0);
+
 
             }
         });
@@ -69,6 +78,7 @@ public class SettingsFragment extends BaseFragment {
             public void run() {
                 setNotification.setVisibility(View.INVISIBLE);
                 setTime.setEnabled(false);
+                imm.hideSoftInputFromWindow(setTime.getWindowToken(), 0);
             }
         });
 

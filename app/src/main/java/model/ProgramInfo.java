@@ -6,7 +6,7 @@ package model;
 public class ProgramInfo {
 
     long startTime;
-    long doneTime;
+    long endTime;
     boolean wind;
     boolean lowPrice;
     String name;
@@ -20,12 +20,12 @@ public class ProgramInfo {
         this.startTime = startTime;
     }
 
-    public long getDoneTime() {
-        return doneTime;
+    public long getEndTime() {
+        return endTime;
     }
 
-    public void setDoneTime(long doneTime) {
-        this.doneTime = doneTime;
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
     }
 
     public boolean isWind() {

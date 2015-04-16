@@ -4,6 +4,7 @@ import android.util.Log;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.washer.smart.smartwasher.R;
 
@@ -11,6 +12,7 @@ import java.util.Calendar;
 
 import dialogs.CustomDialog;
 import dialogs.WasherProgramDialog;
+import extra.Storage;
 import model.StartStatus;
 import sdk.CallBack;
 import sdk.WasherError;
@@ -26,6 +28,7 @@ import sdk.WasherService;
  */
 public class HomeSleepFragment extends BaseFragment {
     LinearLayout scheduleButton, startNowButton;
+    String programName, degreeName;
 
     @Override
     protected void init(View view) {
@@ -51,6 +54,8 @@ public class HomeSleepFragment extends BaseFragment {
 
 
 
+
+
     private void startNow(){
         WasherProgramDialog wpd = new WasherProgramDialog(getActivity());
 
@@ -59,12 +64,16 @@ public class HomeSleepFragment extends BaseFragment {
             public void run(int[] ids, String[] tags) {
 
                 long currentTime = 0;
-                int tempMin;
+                programName = tags[0];
+                degreeName = tags[1];
 
                 Calendar rightNow = Calendar.getInstance();
                 currentTime = rightNow.getTimeInMillis();
 
-                WasherService.startAt(currentTime, 45, new CallBack<StartStatus>() {
+                Storage.saveInt(Storage.LAST_PROGRAM_ID, ids[0]);
+                Storage.saveInt(Storage.LAST_DEGREE_ID, ids[1]);
+
+                WasherService.startAt(currentTime, 45, programName, degreeName, new CallBack<StartStatus>() {
                     @Override
                     public void onSuccess(StartStatus startStatus) {
                         Log.d("hej", "Great! Will start server!");
@@ -89,6 +98,12 @@ public class HomeSleepFragment extends BaseFragment {
         });
 
         wpd.show();
+
+        int programIndex = Storage.loadInt(Storage.LAST_PROGRAM_ID, 0);
+        int degreeIndex = Storage.loadInt(Storage.LAST_DEGREE_ID, 0);
+
+        wpd.setIds(programIndex, degreeIndex);
+
         wpd.setRightButton("Starta");
     }
 

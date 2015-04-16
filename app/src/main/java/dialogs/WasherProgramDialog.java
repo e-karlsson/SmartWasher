@@ -78,6 +78,11 @@ public class WasherProgramDialog extends CustomDialog {
         rightButtonTitle.setText(title);
     }
 
+    public void setIds(int program, int degree){
+        programPicker.setValue(program);
+        degreePicker.setValue(degree);
+    }
+
     private void initPickers(){
 
 

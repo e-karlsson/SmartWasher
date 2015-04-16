@@ -7,8 +7,6 @@ import java.util.List;
  */
 public class WashRecord {
 
-    long endTime;
-    long startTime;
     float totalEnergy;
     float price;
     List<EnergyPoint> points;
@@ -20,22 +18,6 @@ public class WashRecord {
 
     public void setProgramInfo(ProgramInfo programInfo) {
         this.programInfo = programInfo;
-    }
-
-    public long getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(long endTime) {
-        this.endTime = endTime;
-    }
-
-    public long getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(long startTime) {
-        this.startTime = startTime;
     }
 
     public float getTotalEnergy() {

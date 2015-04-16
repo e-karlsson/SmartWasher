@@ -1,9 +1,6 @@
 package fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -19,6 +16,7 @@ import dialogs.CustomDialog;
 import dialogs.WasherProgramDialog;
 import dialogs.WasherTimeDialog;
 import extra.FontCache;
+import extra.MenuBar;
 import extra.Storage;
 import model.StartStatus;
 import sdk.CallBack;
@@ -34,9 +32,8 @@ public class StartFragment extends BaseFragment {
     int dayIndex;
     int hourIndex;
     int minIndex;
-
-
-    String program;
+    int programIndex = 0;
+    int degreeIndex = 0;
 
     NavigationBar topStartBar;
     LinearLayout extraParams;
@@ -44,8 +41,8 @@ public class StartFragment extends BaseFragment {
     LinearLayout startTimeLayout;
     LinearLayout startChooseProgram;
     TextView startTimeDescription, chooseProgramDescription, startTimeTitle;
-    String programName = "Välj program";
-    String degreeName = "Välj grader";
+    String programName = "Välj tvättprogram";
+    String degreeName = "";
     Switch priceSwitch, windSwitch;
 
 
@@ -53,8 +50,10 @@ public class StartFragment extends BaseFragment {
     @Override
     protected void init(View view) {
         TextView startTimeFa = (TextView) view.findViewById(R.id.tv_start_time_fa);
+        TextView startProgramFa = (TextView) view.findViewById(R.id.tv_start_program_fa);
+        FontCache.setCustomFont(startProgramFa, getResources().getString(R.string.fa), getActivity());
         FontCache.setCustomFont(startTimeFa, getResources().getString(R.string.fa), getActivity());
-        startTimeFa.setText("\u0f00");
+
         topStartBar = NavigationBar.greenWhiteToggle(view);
         extraParams = (LinearLayout) view.findViewById(R.id.ll_extra_params);
         startButton = (LinearLayout) view.findViewById(R.id.ll_start_start_button);
@@ -153,6 +152,14 @@ public class StartFragment extends BaseFragment {
         time = currentTime;
     }
 
+    private void setProgram(){
+        if(degreeName.equals("")){
+            chooseProgramDescription.setText(programName);
+        }else{
+            chooseProgramDescription.setText(programName + " > " + degreeName + "°C");
+        }
+    }
+
     private boolean validateFields(){
         boolean isOK = true;
         if(time<0){
@@ -187,9 +194,9 @@ public class StartFragment extends BaseFragment {
         if(validateFields() == false) return;
 
         if(topStartBar.getSelectedId() == 0){
-            WasherService.startAt(time, 45, callback);
+            WasherService.startAt(time, 45, programName, degreeName, callback);
         }else{
-            WasherService.startReadyAt(time, 45, priceSwitch.isChecked(), windSwitch.isChecked(), callback);
+            WasherService.startReadyAt(time, 45, programName, degreeName, priceSwitch.isChecked(), windSwitch.isChecked(), callback);
         }
 
         MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SCHEDULE,false);
@@ -208,6 +215,13 @@ public class StartFragment extends BaseFragment {
             public void run(int[] ids, String[] tags) {
                 chooseProgramDescription.setText(tags[0] + " > " + tags[1] + "°C");
                 chooseProgramDescription.setTextColor(getResources().getColor(R.color.text_color_dark_gray));
+                programName = tags[0];
+                degreeName = tags[1];
+                programIndex = ids[0];
+                degreeIndex = ids[1];
+
+                Storage.saveInt(Storage.LAST_PROGRAM_ID, programIndex);
+                Storage.saveInt(Storage.LAST_DEGREE_ID, degreeIndex);
 
             }
         });
@@ -219,7 +233,12 @@ public class StartFragment extends BaseFragment {
             }
         });
 
+        programIndex = Storage.loadInt(Storage.LAST_PROGRAM_ID, programIndex);
+        degreeIndex = Storage.loadInt(Storage.LAST_DEGREE_ID, degreeIndex);
+
         wpd.show();
+        wpd.setIds(programIndex, degreeIndex);
+
     }
 
     public void chooseTime() {
@@ -287,8 +306,8 @@ public class StartFragment extends BaseFragment {
 
     private void load(){
         topStartBar.loadState("StartTopBar");
-        programName = Storage.loadString(Storage.LAST_PROGRAM_STRING,"Välj program");
-        degreeName = Storage.loadString(Storage.LAST_PROGRAM_STRING,"Välj grader");
+        programName = Storage.loadString(Storage.LAST_PROGRAM_STRING, "Välj program");
+        degreeName = Storage.loadString(Storage.LAST_DEGREE_STRING,"Välj grader");
         priceSwitch.setChecked(Storage.loadBoolean(Storage.CHEAP_PRICE, false));
         windSwitch.setChecked(Storage.loadBoolean(Storage.USE_WIND, false));
     }
@@ -297,12 +316,21 @@ public class StartFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        MenuBar.showBackButton();
+        MenuBar.setBackAction(new Runnable() {
+            @Override
+            public void run() {
+                MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SLEEP);
+            }
+        });
         load();
+        setProgram();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        MenuBar.hideBackButton();
         save();
     }
 

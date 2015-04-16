@@ -17,12 +17,26 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="1.5"></LinearLayout>
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:focusableInTouchMode="false"
+            android:id="@+id/ll_main_menu_bar_back">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:text="@string/back_icon"
+                android:textSize="@dimen/forward_arrow"
+                android:gravity="center"
+                android:id="@+id/tv_main_back_icon"
+                android:textIsSelectable="false" />
+        </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="7"
             android:gravity="center">
@@ -37,7 +51,7 @@
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1.5"></LinearLayout>
     </LinearLayout>
@@ -49,7 +63,7 @@
         android:layout_height="0dp"
         class="fragments.MyViewPager"
         android:id="@+id/viewpager"
-        android:layout_weight="75"
+        android:layout_weight="78"
         android:layout_gravity="center_horizontal" />
 
 
@@ -65,7 +79,7 @@
         android:layout_alignParentStart="true"
         android:background="@color/tieto_green"
         android:id="@+id/ll_nav_parent"
-        android:layout_weight="15">
+        android:layout_weight="12">
 
 
         <LinearLayout
@@ -81,10 +95,11 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
-                android:text="H"
+                android:text="@string/home_icon"
                 android:textSize="@dimen/bottom_nav_icon_size"
                 android:gravity="center"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/tv_main_home_icon" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -112,10 +127,11 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
-                android:text="H"
+                android:text="@string/history_icon"
                 android:textSize="@dimen/bottom_nav_icon_size"
                 android:gravity="center"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/tv_main_history_icon" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -143,10 +159,11 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
-                android:text="I"
+                android:text="@string/settings_icon"
                 android:textSize="@dimen/bottom_nav_icon_size"
                 android:gravity="center"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/tv_main_settings_icon" />
 
             <TextView
                 android:layout_width="fill_parent"

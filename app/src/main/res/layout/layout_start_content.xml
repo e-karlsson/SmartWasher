@@ -110,9 +110,10 @@
             android:layout_height="match_parent"
             android:text="@string/forward_arrow"
             android:layout_weight="2"
-            android:gravity="center"
             android:id="@+id/tv_start_time_fa"
-            android:textSize="@dimen/forward_arrow" />
+            android:textSize="@dimen/forward_arrow"
+            android:gravity="center_vertical|right"
+            android:paddingRight="@dimen/padding_left" />
     </LinearLayout>
 
     <!-- EMPTY -->
@@ -246,13 +247,15 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="2"
-            android:gravity="center"
-            android:id="@+id/ll_start_program_arrow">
+            android:id="@+id/ll_start_program_arrow"
+            android:gravity="center_vertical|right">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=">"
-                android:textSize="@dimen/forward_arrow"/>
+                android:text="@string/forward_arrow"
+                android:textSize="@dimen/forward_arrow"
+                android:paddingRight="@dimen/padding_left"
+                android:id="@+id/tv_start_program_fa" />
         </LinearLayout>
     </LinearLayout>
 

@@ -7,4 +7,10 @@
     <string name="fa">fontawesome-webfont.ttf</string>
 
     <string name="forward_arrow">\uf054</string>
+    <string name="home_icon">\uf015</string>
+    <string name="history_icon">\uf1da</string>
+    <string name="settings_icon">\uf013</string>
+    <string name="back_icon">\uf053</string>
+
+
 </resources>
