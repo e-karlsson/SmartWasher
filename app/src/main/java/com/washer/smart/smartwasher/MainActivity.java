@@ -37,6 +37,7 @@ public class MainActivity extends FragmentActivity {
 
     MyViewPager viewPager;
     PagerAdapter pagerAdapter;
+    private boolean running = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,16 +129,29 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-        new LiveFetch().execute("");
+
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        running = true;
+        new LiveFetch().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        running = false;
+    }
 
     private class LiveFetch extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
 
             while(true){
-
+                if(!running) return null;
                 WasherService.getLiveRecord(new CallBack<LiveRecord>() {
                     @Override
                     public void onSuccess(LiveRecord liveRecord) {

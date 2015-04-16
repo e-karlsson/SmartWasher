@@ -1,5 +1,6 @@
 package sdk;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -18,7 +19,7 @@ public abstract class GetExecutor<T> {
      public GetExecutor(String url, CallBack<T> callBack){
          this.callBack = callBack;
          Log.d("HTTP GET", url);
-         new Get().execute(url);
+         new Get().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url);
      }
 
 
