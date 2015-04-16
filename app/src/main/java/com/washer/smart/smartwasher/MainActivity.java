@@ -1,6 +1,7 @@
 package com.washer.smart.smartwasher;
 
 
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.app.Activity;
 import android.content.Context;
@@ -20,11 +21,15 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import extra.LiveData;
 import dialogs.CustomDialog;
 import extra.FontCache;
 import extra.MenuBar;
 import extra.Storage;
 import fragments.*;
+import model.LiveRecord;
+import sdk.CallBack;
+import sdk.WasherError;
 import sdk.WasherService;
 
 
@@ -98,7 +103,7 @@ public class MainActivity extends FragmentActivity {
         navbar.addView(leftButton, new Runnable() {
             @Override
             public void run() {
-                viewPager.setCurrentItem(0);
+                MyViewPager.goHome();
 
 
             }
@@ -122,5 +127,40 @@ public class MainActivity extends FragmentActivity {
 
             }
         });
+
+        new LiveFetch().execute("");
     }
+
+
+    private class LiveFetch extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... params) {
+
+            while(true){
+
+                WasherService.getLiveRecord(new CallBack<LiveRecord>() {
+                    @Override
+                    public void onSuccess(LiveRecord liveRecord) {
+                        LiveData.setLiveRecord(liveRecord);
+                        MyViewPager.changeHome();
+                    }
+
+                    @Override
+                    public void onError(WasherError error) {
+
+                    }
+                });
+
+
+                try {
+                    Thread.sleep(15000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    }
+
+
 }

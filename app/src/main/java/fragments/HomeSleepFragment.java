@@ -117,34 +117,6 @@ public class HomeSleepFragment extends BaseFragment {
     }
 
 
-    private class LiveFetch extends AsyncTask<String, String, String>{
-        @Override
-        protected String doInBackground(String... params) {
 
-            while(shown){
-
-                WasherService.getLiveRecord(new CallBack<LiveRecord>() {
-                    @Override
-                    public void onSuccess(LiveRecord liveRecord) {
-
-                    }
-
-                    @Override
-                    public void onError(WasherError error) {
-
-                    }
-                });
-
-
-                try {
-                    Thread.sleep(15000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            return null;
-        }
-    }
 
 }

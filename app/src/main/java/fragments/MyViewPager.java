@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
+import extra.LiveData;
+
 /**
  * Created by xxottosl on 2015-04-13.
  */
@@ -68,6 +70,20 @@ public class MyViewPager extends ViewPager {
 
     public static MyViewPager getInstance(){
         return self;
+    }
+
+    public static void goHome(){
+        int current = self.getCurrentItem();
+        int homeItem = LiveData.getState();
+        if(current != homeItem)
+               self.setCurrentItem(homeItem);
+    }
+
+    public static void changeHome(){
+        int current = self.getCurrentItem();
+        int homeItem = LiveData.getState();
+        if(current <= 3 && current != homeItem)
+            self.setCurrentItem(homeItem);
     }
 
     @Override
