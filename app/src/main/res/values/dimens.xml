@@ -18,4 +18,8 @@
     <dimen name="start_detail_description">15dp</dimen>
     <dimen name="text_size_description">17dp</dimen>
 
+
+    <dimen name="schedule_icons">20dp</dimen>
+
+
 </resources>

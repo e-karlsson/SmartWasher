@@ -6,9 +6,17 @@ import android.widget.TextView;
 
 import com.washer.smart.smartwasher.R;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 
 import extra.FontCache;
+import extra.LiveData;
+import model.LiveRecord;
+import model.StartStatus;
+import model.Status;
+import sdk.CallBack;
+import sdk.WasherError;
 import sdk.WasherService;
 
 /**
@@ -16,12 +24,24 @@ import sdk.WasherService;
  */
 public class HomeScheduleFragment extends BaseFragment {
 
+    long startTime;
+    String programName, degreeName;
+    boolean wind, cheapest;
     LinearLayout startButton, cancelButton, changeButton;
+    TextView startTimeText, programNameText, degreeNameText, extraName, extraIcon;
+
     @Override
     protected void init(View view) {
         startButton = (LinearLayout) view.findViewById(R.id.ll_start_schedule_start_direct);
         cancelButton = (LinearLayout) view.findViewById(R.id.ll_start_schedule_cancel);
         changeButton = (LinearLayout) view.findViewById(R.id.ll_start_schedule_change);
+
+        startTimeText = (TextView) view.findViewById(R.id.tv_start_schedule_time);
+        programNameText = (TextView) view.findViewById(R.id.tv_start_schedule_wash_program);
+        degreeNameText = (TextView) view.findViewById(R.id.tv_start_schedule_wash_degree);
+        extraName = (TextView) view.findViewById(R.id.tv_start_schedule_extra);
+        extraIcon = (TextView) view.findViewById(R.id.tv_schedule_extra);
+
 
         TextView scheduleTimeFa = (TextView) view.findViewById(R.id.tv_schedule_clock);
         TextView scheduleProgramFa = (TextView) view.findViewById(R.id.tv_schedule_program);
@@ -31,16 +51,25 @@ public class HomeScheduleFragment extends BaseFragment {
         FontCache.setCustomFont(scheduleTimeFa, getResources().getString(R.string.fa), getActivity());
         FontCache.setCustomFont(scheduleExtraFa, getResources().getString(R.string.fa), getActivity());
 
+
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_WASHING,false);
-
                 Calendar rightNow = Calendar.getInstance();
                 long currentTime = rightNow.getTimeInMillis();
+                WasherService.startAt(currentTime, 45, programName, degreeName, new CallBack<StartStatus>() {
+                    @Override
+                    public void onSuccess(StartStatus startStatus) {
 
+                    }
 
+                    @Override
+                    public void onError(WasherError error) {
 
+                    }
+                });
+
+                MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_WASHING,false);
 
             }
         });
@@ -48,6 +77,18 @@ public class HomeScheduleFragment extends BaseFragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                WasherService.stop(new CallBack<Status>() {
+                    @Override
+                    public void onSuccess(Status status) {
+
+                    }
+
+                    @Override
+                    public void onError(WasherError error) {
+
+                    }
+                });
+
                 MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SLEEP,false);
             }
         });
@@ -60,6 +101,47 @@ public class HomeScheduleFragment extends BaseFragment {
         });
 
 
+    }
+
+    private void updateInfo(){
+        WasherService.getLiveRecord(new CallBack<LiveRecord>() {
+            @Override
+            public void onSuccess(LiveRecord liveRecord) {
+                startTime = liveRecord.getProgramInfo().getStartTime();
+                programName = liveRecord.getProgramInfo().getName();
+                degreeName = liveRecord.getProgramInfo().getDegree();
+                wind = liveRecord.getProgramInfo().isWind();
+                cheapest = liveRecord.getProgramInfo().isLowPrice();
+
+                programNameText.setText(programName);
+                degreeNameText.setText(degreeName);
+
+                if(wind){
+                    extraName.setText("Vindkraft");
+                    extraIcon.setText(getResources().getText(R.string.wind_icon));
+                }else if(cheapest){
+                    extraName.setText("Billigast el");
+                    extraIcon.setText(getResources().getText(R.string.money_icon));
+
+                }else{
+                    extraName.setText("");
+                    extraIcon.setText("");
+                }
+            }
+
+            @Override
+            public void onError(WasherError error) {
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateInfo();
     }
 
     public static BaseFragment create() {
