@@ -165,11 +165,13 @@ public class MainActivity extends FragmentActivity {
                     }
                 });
 
-
-                try {
-                    Thread.sleep(15000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                for(int i = 0; i < 3; ++i) {
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    MyViewPager.changeHome();
                 }
             }
 

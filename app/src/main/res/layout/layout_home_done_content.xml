@@ -60,7 +60,8 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="6"
-            android:weightSum="9.4">
+            android:weightSum="9.4"
+            android:id="@+id/ll_start_done_info_container">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -209,7 +210,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Extra"
-                        android:id="@+id/textView23"
+                        android:id="@+id/tv_start_done_extra_title"
                         android:textSize="@dimen/start_detail_description"
                         android:textColor="@color/tieto_darkblue" />
                 </LinearLayout>
