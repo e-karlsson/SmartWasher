@@ -18,6 +18,7 @@ public class Timer {
         ti.setHour(""+calendar.get(Calendar.HOUR_OF_DAY));
         ti.setMinute(""+calendar.get(Calendar.MINUTE));
         ti.setSecond(""+calendar.get(Calendar.SECOND));
+        ti.monthNumber = calendar.get(Calendar.MONTH) + 1;
 
 
         return ti;
@@ -61,6 +62,7 @@ public class Timer {
 
     public static class TimeInfo{
         String month, day, hour, minute, second;
+        int monthNumber;
 
 
         public String getMonth() {
@@ -95,12 +97,25 @@ public class Timer {
             this.minute = makeTwo(minute);
         }
 
+        public int getMonthNumber() {
+            return monthNumber;
+        }
+
+        public void setMonthNumber(int monthNumber) {
+            this.monthNumber = monthNumber;
+        }
+
         public String getSecond() {
             return second;
         }
 
         public void setSecond(String second) {
             this.second = makeTwo(second);
+        }
+
+        @Override
+        public String toString() {
+            return day+" "+month+" "+hour+":"+minute;
         }
     }
 
