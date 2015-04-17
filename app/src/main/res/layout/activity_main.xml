@@ -62,9 +62,11 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         class="fragments.MyViewPager"
+        android:descendantFocusability="afterDescendants"
         android:id="@+id/viewpager"
         android:layout_weight="78"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:nestedScrollingEnabled="true"/>
 
 
         <!-- BOTTOM NAV BAR -->

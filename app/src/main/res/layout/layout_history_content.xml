@@ -3,19 +3,19 @@
 
     <!-- CONTENT -->
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="0dp"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context=".MainActivity"
-        android:orientation="vertical"
-        android:id="@+id/ll_content_parent"
-        android:weightSum="100"
-        android:background="@color/background">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="0dp"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:id="@+id/ll_content_parent"
+    android:weightSum="100"
+    android:background="@color/background">
 
     <!-- Tabs (Vecka, månad, år) weight: 5 -->
     <LinearLayout
@@ -160,7 +160,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:id="@+id/ll_history_tab_graf">
+            android:id="@+id/ll_history_tab_graf"
+            android:background="@color/tieto_orange">
 
             <TextView
                 android:layout_width="fill_parent"
@@ -193,21 +194,44 @@
 
 
     </LinearLayout>
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="0dp"
-        android:layout_weight="70"
-        android:id="@+id/sv_history"
-        android:layout_gravity="center_horizontal"
-        android:fillViewport="false">
+        android:layout_weight="60">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/ll_history_sv"></LinearLayout>
-    </ScrollView>
+            android:orientation="vertical"
+            android:id="@+id/ll_history_graph_content"
+            android:weightSum="100"
+            android:background="#00babe"
+            android:visibility="gone"></LinearLayout>
+        <view
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            class="customviews.MyScrollView"
+            android:id="@+id/sv_history"
+
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:descendantFocusability="beforeDescendants"
+
+
+           >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:id="@+id/ll_history_scroll_content"
+
+                android:weightSum="100"></LinearLayout>
+    </view>
+
+    </LinearLayout>
 
     <!-- Grafer -->
 

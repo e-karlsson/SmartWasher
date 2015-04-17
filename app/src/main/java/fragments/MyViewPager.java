@@ -93,7 +93,7 @@ public class MyViewPager extends ViewPager {
         }
     }
 
-    @Override
+   @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         // Never allow swiping to switch between pages
         return false;
@@ -104,4 +104,6 @@ public class MyViewPager extends ViewPager {
         // Never allow swiping to switch between pages
         return false;
     }
+
+
 }

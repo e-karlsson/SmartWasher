@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.washer.smart.smartwasher.R;
 
@@ -38,12 +39,12 @@ public class HomeDoneFragment extends BaseFragment {
                 WasherService.setDone(new CallBack<Status>() {
                     @Override
                     public void onSuccess(Status status) {
-                        Log.d("Washer", "I've sent DONE.");
+                       MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SLEEP);
                     }
 
                     @Override
                     public void onError(WasherError error) {
-                        Log.d("Washer", "Unsuccessfully sent DONE.");
+                        Toast.makeText(getActivity(), "Kunde inte ansluta till servern!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -86,11 +87,11 @@ public class HomeDoneFragment extends BaseFragment {
 
                 endText.setText(timeInfo.getHour() + ":" + timeInfo.getMinute());
 
-                wattText.setText(energy / 1000 / 3600 + " kWh");
+                String energyString = String.format("%.3f", record.getKiloWattHours());
 
-                float totalPrice = energy * price / 1000 / 3600;
+                wattText.setText(energyString+ " kWh");
 
-                priceText.setText(totalPrice + " öre");
+                priceText.setText(String.format("%.3f", record.getCost()) + " öre");
 
 
                 infoContainer.setVisibility(View.VISIBLE);

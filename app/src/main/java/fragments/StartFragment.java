@@ -149,7 +149,9 @@ public class StartFragment extends BaseFragment {
         startTimeDescription.setText("idag, kl. "+rightNow.get(Calendar.HOUR_OF_DAY)+":"+min);
 
 
-        time = currentTime;
+
+
+        time = rightNow.getTimeInMillis();
     }
 
     private void setProgram(){

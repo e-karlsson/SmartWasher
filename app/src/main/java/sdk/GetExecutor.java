@@ -36,7 +36,8 @@ public abstract class GetExecutor<T> {
                     T t = parse(result);
                     callBack.onSuccess(t);
                 }catch(Exception e){
-                    callBack.onError(new WasherError(e.getMessage()));
+                    Log.d("myapp", Log.getStackTraceString(e));
+                    callBack.onError(new WasherError(""+e.getMessage()));
                 }
             }
         }

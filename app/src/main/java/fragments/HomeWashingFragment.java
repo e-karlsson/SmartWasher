@@ -55,6 +55,8 @@ public class HomeWashingFragment extends BaseFragment {
     }
 
     private void setData(){
+        if(LiveData.getLiveRecord() == null) return;
+
         boolean wind = LiveData.getLiveRecord().getProgramInfo().isWind();
         boolean cheapest = LiveData.getLiveRecord().getProgramInfo().isLowPrice();
 
