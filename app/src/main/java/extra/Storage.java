@@ -26,6 +26,10 @@ public class Storage {
     public static final String LAST_PROGRAM_STRING = "lastProgramString";
     public static final String LAST_PROGRAM_ID = "lastProgramID";
 
+    //GCM
+    public static final String REG_ID = "regid";
+    public static final String APP_VER = "appver";
+    public static final String SENT_ID = "sentid";
 
 
     public static void init(Context context){

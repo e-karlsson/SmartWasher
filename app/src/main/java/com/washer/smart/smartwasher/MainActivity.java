@@ -10,11 +10,15 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import org.w3c.dom.Text;
 
@@ -39,14 +43,14 @@ public class MainActivity extends FragmentActivity {
     PagerAdapter pagerAdapter;
     private boolean running = false;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        WasherService.init("http://kexdns.ddns.net", 8080);
-        Storage.init(this);
-        new HTTPTest();
+        GcmHandler.handle(this);
         init();
     }
 
@@ -131,6 +135,8 @@ public class MainActivity extends FragmentActivity {
 
 
     }
+
+
 
 
     @Override

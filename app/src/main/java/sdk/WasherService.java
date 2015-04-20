@@ -176,4 +176,15 @@ public class WasherService {
         };
     }
 
+    public static void register(String id,CallBack<Status> callBack){
+
+        GetExecutor executor = new GetExecutor(baseUrl+"set/gcmid?id="+id, callBack) {
+            @Override
+            public Object parse(String json) throws Exception {
+                Status status = GetExecutor.getMapper().readValue(json, Status.class);
+                return status;
+            }
+        };
+    }
+
 }
