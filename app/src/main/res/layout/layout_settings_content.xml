@@ -35,11 +35,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Prisavtal"
-                android:textSize="@dimen/tv_start_param"
+                android:text="Elavtal"
+                android:textSize="@dimen/settings_title_size"
                 android:textColor="@color/tieto_darkblue"/>
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Här kan du välja vad du har för elavtal. "
+        android:layout_weight="5"
+        android:textColor="@color/tieto_darkblue"
+        android:textSize="@dimen/settings_info_size"
+        android:gravity="center_vertical" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -49,6 +58,8 @@
         android:weightSum="100"
         android:background="@drawable/all_around_stroke"
         android:padding="1dp">
+
+
 
         <LinearLayout
             android:orientation="horizontal"
@@ -87,7 +98,14 @@
         </LinearLayout>
 
     </LinearLayout>
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Här kan du välja vad du har för elavtal. "
+        android:layout_weight="5"
+        android:textColor="@color/tieto_darkblue"
+        android:textSize="@dimen/settings_info_size"
+        android:gravity="center_vertical" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -122,21 +140,13 @@
                 android:layout_height="fill_parent"
                 android:text="öre /kWh"
                 android:textColor="@color/tieto_darkblue"
-                android:textSize="@dimen/tv_start_param"
+                android:textSize="@dimen/settings_action_size"
                 android:gravity="center"
                 android:id="@+id/textView" />
         </LinearLayout>
     </LinearLayout>
 
 
-    <!-- EMPTY -->
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5">
-
-    </LinearLayout>
 
 
     <!-- Notiser -->
@@ -159,11 +169,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notiser"
-                android:textSize="@dimen/tv_start_param"
+                android:text="Påminnelser"
+                android:textSize="@dimen/settings_title_size"
                 android:textColor="@color/tieto_darkblue"/>
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Här kan du välja om du vill ha påminnelser. "
+        android:layout_weight="5"
+        android:textColor="@color/tieto_darkblue"
+        android:textSize="@dimen/settings_info_size"
+        android:gravity="center_vertical" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -212,63 +231,138 @@
         </LinearLayout>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Info om notiser"
+        android:id="@+id/tv_settings_push_info"
+        android:layout_weight="5"
+        android:textColor="@color/tieto_darkblue"
+        android:textSize="@dimen/settings_info_size"
+        android:gravity="center_vertical" />
+
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:weightSum="10"
-        android:id="@+id/ll_settings_time_to_remember">
+        android:layout_weight="16"
+        android:weightSum="20"
+        android:id="@+id/ll_settings_reminder_container">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="Appen kan påminna dig att plocka ur tvätt du glömt att hänga upp"
+            android:id="@+id/textView17"
+            android:layout_weight="10"
+            android:textColor="@color/tieto_darkblue"
+            android:textSize="@dimen/settings_info_size"
+            android:gravity="center_vertical" />
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="6"
-            android:gravity="center_vertical|center_horizontal" >
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:weightSum="10"
+            android:id="@+id/ll_settings_time_to_remember"
+            android:gravity="center_vertical|left">
 
-            <TextView
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:text="Tid till påminnelse"
-                android:background="@color/background"
-                android:textColor="@color/tieto_darkblue"
-                android:textSize="@dimen/tv_start_param"
-                android:gravity="center"
-                android:id="@+id/textView2" />
+                android:gravity="center_vertical|center_horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:background="@color/background"
+                    android:textColor="@color/tieto_darkblue"
+                    android:textSize="@dimen/settings_info_size"
+                    android:gravity="center"
+                    android:id="@+id/textView2"
+                    android:singleLine="false"
+                    android:text="Påminn mig efter" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2" >
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/et_settings_reminder_time"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:gravity="center_vertical|center_horizontal" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="min"
+                    android:background="@color/background"
+                    android:textColor="@color/tieto_darkblue"
+                    android:textSize="@dimen/settings_info_size"
+                    android:gravity="center"
+                    android:id="@+id/textView3" />
+            </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:weightSum="15"
+        android:gravity="center">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="2" >
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:weightSum="10"
+            android:gravity="center">
 
-            <EditText
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/et_settings_reminder_time"
-                android:gravity="center_horizontal" />
-        </LinearLayout>
+                android:layout_weight="6"
+                android:background="@drawable/all_around_stroke"
+                android:gravity="center_vertical"
+                android:padding="1dp"
+                android:id="@+id/ll_settings_save_button" >
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="2"
-            android:gravity="center_vertical|center_horizontal" >
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:background="@color/tieto_green" >
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="min"
-                android:background="@color/background"
-                android:textColor="@color/tieto_darkblue"
-                android:textSize="@dimen/tv_start_param"
-                android:gravity="center"
-                android:id="@+id/textView3" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SPARA"
+                        android:textSize="@dimen/button_text_size"
+                        android:textColor="@color/button_text_color" />
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

@@ -1,5 +1,7 @@
 package fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -37,18 +39,7 @@ public class HomeWashingFragment extends BaseFragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WasherService.stop(new CallBack<Status>() {
-                    @Override
-                    public void onSuccess(Status status) {
-                        MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SLEEP,false);
-                    }
-
-                    @Override
-                    public void onError(WasherError error) {
-                        Toast.makeText(getActivity(), "Kunde inte ansluta till servern!", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
+               showCancelDialog();
 
             }
         });
@@ -87,6 +78,41 @@ public class HomeWashingFragment extends BaseFragment {
             extraDescription.setText("");
         }
 
+    }
+
+
+    private void showCancelDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Vill du verkligen avbryta den pågående tvätten?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, int which) {
+                WasherService.stop(new CallBack<Status>() {
+                    @Override
+                    public void onSuccess(Status status) {
+                        MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SLEEP,false);
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError(WasherError error) {
+                        Toast.makeText(getActivity(), "Kunde inte ansluta till servern!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+
+                    }
+                });
+
+            }
+        });
+        builder.setNegativeButton("Nej", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 

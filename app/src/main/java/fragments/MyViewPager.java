@@ -22,6 +22,8 @@ public class MyViewPager extends ViewPager {
     public static final int HISTORY = 6;
     public static final int SETTINGS = 7;
 
+    private static final long STICKY_TIME = 10000;
+    private static long lastHomeSwitch;
 
     private int lastItem = 0;
     private TextView title;
@@ -50,13 +52,6 @@ public class MyViewPager extends ViewPager {
     public void setCurrentItem(int item) {
 
         setCurrentItem(item, false);
-    /*    BaseFragment lastFragment = MyFragmentAdapter.getFragment(lastItem);
-        lastFragment.onPause();      
-        super.setCurrentItem(item);
-        BaseFragment fragment = MyFragmentAdapter.getFragment(item);
-        fragment.onResume();
-        lastItem = item;
-        title.setText(fragment.getTitleName());*/
     }
 
     @Override
@@ -68,6 +63,8 @@ public class MyViewPager extends ViewPager {
         fragment.onResume();
         lastItem = item;
         title.setText(fragment.getTitleName());
+        if(item <= HOME_DONE)
+            lastHomeSwitch = System.currentTimeMillis();
     }
 
     public static MyViewPager getInstance(){
@@ -84,10 +81,10 @@ public class MyViewPager extends ViewPager {
     public static void changeHome(){
         int current = self.getCurrentItem();
         int homeItem = LiveData.getState();
-        if(current <= 3){
+        if(current <= HOME_DONE){
             if(current == homeItem){
                MyFragmentAdapter.getFragment(current).update();
-            }else{
+            }else if (System.currentTimeMillis() - lastHomeSwitch >= STICKY_TIME){
                 self.setCurrentItem(homeItem);
             }
         }
