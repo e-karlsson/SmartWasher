@@ -9,9 +9,7 @@
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context=".MainActivity"
+    tools:context=".MainActivity"
         android:orientation="vertical"
         android:id="@+id/ll_content_parent"
         android:weightSum="100"
@@ -22,7 +20,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="8"
         android:weightSum="10"
         android:paddingLeft="@dimen/padding_left"
         android:gravity="center_vertical"
@@ -44,11 +42,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="Här kan du välja vad du har för elavtal. "
+        android:text="Välj vad du har för elavtal. "
         android:layout_weight="5"
         android:textColor="@color/tieto_darkblue"
         android:textSize="@dimen/settings_info_size"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -102,10 +100,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:text="Här kan du välja vad du har för elavtal. "
-        android:layout_weight="5"
         android:textColor="@color/tieto_darkblue"
         android:textSize="@dimen/settings_info_size"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"
+        android:id="@+id/tv_settings_current_avtal"
+        android:lines="2"
+        android:layout_weight="10" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -124,7 +124,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:inputType="number|numberDecimal"
-                android:ems="10"
+                android:ems="8"
                 android:id="@+id/et_settings_price"
                 android:gravity="center_horizontal" />
         </LinearLayout>
@@ -154,7 +154,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="8"
         android:weightSum="10"
         android:paddingLeft="@dimen/padding_left"
         android:gravity="center_vertical"
@@ -178,11 +178,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="Här kan du välja om du vill ha påminnelser. "
-        android:layout_weight="5"
+        android:text="Påminnelse när tvätten är klar?"
         android:textColor="@color/tieto_darkblue"
         android:textSize="@dimen/settings_info_size"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"
+        android:layout_weight="5"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -231,93 +231,83 @@
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="Info om notiser"
-        android:id="@+id/tv_settings_push_info"
-        android:layout_weight="5"
-        android:textColor="@color/tieto_darkblue"
-        android:textSize="@dimen/settings_info_size"
-        android:gravity="center_vertical" />
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="16"
-        android:weightSum="20"
-        android:id="@+id/ll_settings_reminder_container">
+        android:id="@+id/ll_settings_reminder_container"
+        android:layout_weight="5"
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="Appen kan påminna dig att plocka ur tvätt du glömt att hänga upp"
-            android:id="@+id/textView17"
-            android:layout_weight="10"
+            android:layout_height="wrap_content"
+            android:text="Påminnelse om du glömt plocka ut tvätten?"
+            android:id="@+id/tv_settings_notification_text"
             android:textColor="@color/tieto_darkblue"
             android:textSize="@dimen/settings_info_size"
-            android:gravity="center_vertical" />
+            android:paddingBottom="2dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:weightSum="10"
+        android:id="@+id/ll_settings_time_to_remember"
+        android:gravity="center_vertical|left">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
-            android:weightSum="10"
-            android:id="@+id/ll_settings_time_to_remember"
-            android:gravity="center_vertical|left">
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical|center_horizontal" >
 
-            <LinearLayout
-                android:orientation="horizontal"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:gravity="center_vertical|center_horizontal" >
+                android:background="@color/background"
+                android:textColor="@color/tieto_darkblue"
+                android:textSize="@dimen/settings_info_size"
+                android:gravity="center"
+                android:id="@+id/textView2"
+                android:singleLine="false"
+                android:text="Påminn mig efter" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:background="@color/background"
-                    android:textColor="@color/tieto_darkblue"
-                    android:textSize="@dimen/settings_info_size"
-                    android:gravity="center"
-                    android:id="@+id/textView2"
-                    android:singleLine="false"
-                    android:text="Påminn mig efter" />
-            </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="2" >
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="0dp"
+            <EditText
+                android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="2" >
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/et_settings_reminder_time"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
 
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:inputType="number"
-                    android:ems="10"
-                    android:id="@+id/et_settings_reminder_time"
-                    android:gravity="center_horizontal" />
-            </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical|center_horizontal" >
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="2"
-                android:gravity="center_vertical|center_horizontal" >
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:text="min"
-                    android:background="@color/background"
-                    android:textColor="@color/tieto_darkblue"
-                    android:textSize="@dimen/settings_info_size"
-                    android:gravity="center"
-                    android:id="@+id/textView3" />
-            </LinearLayout>
+                android:text="min"
+                android:background="@color/background"
+                android:textColor="@color/tieto_darkblue"
+                android:textSize="@dimen/settings_info_size"
+                android:gravity="center"
+                android:id="@+id/textView3" />
         </LinearLayout>
     </LinearLayout>
 
@@ -325,7 +315,7 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="15"
+        android:layout_weight="19"
         android:weightSum="15"
         android:gravity="center">
 
@@ -351,8 +341,8 @@
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:background="@color/tieto_green" >
+                    android:background="@color/tieto_green"
+                    android:gravity="center">
 
                     <TextView
                         android:layout_width="wrap_content"

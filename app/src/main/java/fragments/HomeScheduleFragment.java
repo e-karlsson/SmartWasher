@@ -15,6 +15,7 @@ import java.util.Calendar;
 
 import extra.FontCache;
 import extra.LiveData;
+import extra.Storage;
 import extra.Timer;
 import extra.WasherInfo;
 import model.LiveRecord;
@@ -97,6 +98,7 @@ public class HomeScheduleFragment extends BaseFragment {
                 WasherService.stop(new CallBack<Status>() {
                     @Override
                     public void onSuccess(Status status) {
+                        Storage.saveBoolean(Storage.FROM_START, false);
                         MyViewPager.getInstance().setCurrentItem(MyViewPager.START,false);
                     }
 
@@ -118,7 +120,7 @@ public class HomeScheduleFragment extends BaseFragment {
                 return;
             }
 
-            startTime = liveRecord.getProgramInfo().getStartTime();
+            startTime = liveRecord.getProgramInfo().getEndTime();
             programName = liveRecord.getProgramInfo().getName();
             degreeName = liveRecord.getProgramInfo().getDegree();
             wind = liveRecord.getProgramInfo().isWind();

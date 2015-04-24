@@ -41,6 +41,7 @@ public class HomeSleepFragment extends BaseFragment {
         scheduleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Storage.saveBoolean(Storage.FROM_START, true);
                 MyViewPager.getInstance().setCurrentItem(MyViewPager.START,false);
             }
         });

@@ -25,6 +25,12 @@ public class Storage {
     public static final String LAST_DEGREE_ID = "lastDegreeID";
     public static final String LAST_PROGRAM_STRING = "lastProgramString";
     public static final String LAST_PROGRAM_ID = "lastProgramID";
+    public static final String FIRST_TIME = "firstTime";
+    public static final String FROM_START = "fromStart";
+    public static final String CHANGE_TIME = "changeTime";
+
+
+
 
     //GCM
     public static final String REG_ID = "regid";
@@ -49,6 +55,12 @@ public class Storage {
 
         return prefs.getFloat(name, defValue);
 
+    }
+
+    public static long loadLong(String name, long defValue){
+        SharedPreferences prefs = context.getSharedPreferences(savePath, 0);
+
+        return prefs.getLong(name, defValue);
     }
 
     public static boolean loadBoolean(String name, boolean defValue){
@@ -78,6 +90,15 @@ public class Storage {
 
         editor.putFloat(name, saveValue);
         Log.d("SAVED FLOAT: "+name,""+saveValue);
+        editor.commit();
+    }
+
+    public static void saveLong(String name, long saveValue){
+        SharedPreferences prefs = context.getSharedPreferences(savePath, 0);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.putLong(name, saveValue);
+        Log.d("SAVED LONG: "+name,""+saveValue);
         editor.commit();
     }
 

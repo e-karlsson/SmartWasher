@@ -13,8 +13,6 @@ import android.widget.Toast;
 import com.washer.smart.smartwasher.NavigationBar;
 import com.washer.smart.smartwasher.R;
 
-import org.w3c.dom.Text;
-
 import java.util.Calendar;
 
 import dialogs.CustomDialog;
@@ -155,27 +153,32 @@ public class StartFragment extends BaseFragment {
     }
 
     private void setCurrentTime(){
-        long currentTime =0;
         int tempMin;
 
+        boolean fromStart = Storage.loadBoolean(Storage.FROM_START, true);
         Calendar rightNow = Calendar.getInstance();
+        String min;
 
-        currentTime = rightNow.getTimeInMillis();
+        if(fromStart == false){
+            rightNow.setTimeInMillis(Storage.loadLong(Storage.CHANGE_TIME, rightNow.getTimeInMillis()));
+            min = ""+rightNow.get(Calendar.MINUTE);
+        }else {
 
-        tempMin = rightNow.get(Calendar.MINUTE);
-        tempMin = ((tempMin/5)+1)*5;
+            tempMin = rightNow.get(Calendar.MINUTE);
+            tempMin = ((tempMin / 5) + 1) * 5;
 
-        if(tempMin == 60){
-            tempMin = 0;
-            rightNow.add(Calendar.HOUR_OF_DAY, 1);
+            if (tempMin == 60) {
+                tempMin = 0;
+                rightNow.add(Calendar.HOUR_OF_DAY, 1);
+            }
+            rightNow.set(Calendar.MINUTE, tempMin);
+
+            dayIndex = 0;
+            hourIndex = rightNow.get(Calendar.HOUR_OF_DAY);
+            minIndex = rightNow.get(Calendar.MINUTE) / 5;
+            min = tempMin + "";
+            if (tempMin < 10) min = "0" + min;
         }
-        rightNow.set(Calendar.MINUTE, tempMin);
-
-        dayIndex = 0;
-        hourIndex = rightNow.get(Calendar.HOUR_OF_DAY);
-        minIndex = rightNow.get(Calendar.MINUTE)/5;
-        String min = tempMin+"";
-        if(tempMin < 10) min = "0"+min;
         startTimeDescription.setText("idag, kl. "+rightNow.get(Calendar.HOUR_OF_DAY)+":"+min);
 
 
@@ -233,7 +236,6 @@ public class StartFragment extends BaseFragment {
         }else{
             WasherService.startReadyAt(time, programTime, programName, degreeName, priceSwitch.isChecked(), windSwitch.isChecked(), callback);
         }
-
 
 
 

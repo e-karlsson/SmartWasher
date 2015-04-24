@@ -92,9 +92,17 @@ public class SplashActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Intent intent = new Intent(context, MainActivity.class);
-            startActivity(intent);
-            finish();
+            boolean firstTime = Storage.loadBoolean(Storage.FIRST_TIME, true);
+            if(firstTime == true){
+                Intent intent = new Intent(context, TutorialActivity.class);
+                Storage.saveBoolean(Storage.FIRST_TIME, false);
+                startActivity(intent);
+                finish();
+            }else{
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
     }
 }

@@ -18,7 +18,7 @@
     <dimen name="start_detail_description">15dp</dimen>
     <dimen name="text_size_description">17dp</dimen>
 
-    <dimen name="settings_title_size">20dp</dimen>
+    <dimen name="settings_title_size">24dp</dimen>
     <dimen name="settings_action_size">17dp</dimen>
     <dimen name="settings_info_size">14dp</dimen>
 

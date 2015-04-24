@@ -81,39 +81,48 @@
         android:layout_height="0dp"
         android:layout_weight="10"
         android:weightSum="10"
-        android:background="@drawable/all_around_stroke"
         android:gravity="center_vertical"
         android:id="@+id/ll_start_time"
-        android:paddingLeft="@dimen/padding_left">
+        android:background="#000000"
+        android:padding="1dp">
 
-        <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="När"
-        android:layout_weight="1.5"
-        android:id="@+id/tv_start_time"
-            android:textSize="@dimen/tv_start_param"
-            android:textColor="@color/text_color_dark_gray" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#ffffff"
+            android:paddingLeft="@dimen/padding_left">
 
-        <TextView
+            <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="6.5"
-            android:gravity="center_vertical|right"
-            android:textColor="@color/text_color_light_gray"
-            android:text="idag, kl 17.45"
-            android:id="@+id/tv_start_time_description"
-            android:textSize="@dimen/text_size_description" />
+            android:text="När"
+            android:layout_weight="1.5"
+            android:id="@+id/tv_start_time"
+                android:textSize="@dimen/tv_start_param"
+                android:textColor="@color/text_color_dark_gray" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="@string/forward_arrow"
-            android:layout_weight="2"
-            android:id="@+id/tv_start_time_fa"
-            android:textSize="@dimen/forward_arrow"
-            android:gravity="center_vertical|right"
-            android:paddingRight="@dimen/padding_left" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6.5"
+                android:gravity="center_vertical|right"
+                android:textColor="@color/text_color_light_gray"
+                android:text="idag, kl 17.45"
+                android:id="@+id/tv_start_time_description"
+                android:textSize="@dimen/text_size_description" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/forward_arrow"
+                android:layout_weight="2"
+                android:id="@+id/tv_start_time_fa"
+                android:textSize="@dimen/forward_arrow"
+                android:gravity="center_vertical|right"
+                android:paddingRight="@dimen/padding_left" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <!-- EMPTY -->
@@ -130,7 +139,7 @@
         android:layout_height="0dp"
         android:layout_weight="20"
         android:weightSum="2"
-        android:background="@drawable/all_around_stroke"
+        android:background="#000000"
         android:padding="1dp"
         android:id="@+id/ll_extra_params">
 
@@ -140,7 +149,8 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:weightSum="10">
+            android:weightSum="10"
+            android:background="#ffffff">
 
             <TextView
                 android:layout_width="0dp"
@@ -152,6 +162,7 @@
                 android:textColor="@color/tieto_darkblue"
                 android:textSize="@dimen/schedule_icons" />
 
+          
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="0dp"
@@ -188,7 +199,8 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:weightSum="10">
+            android:weightSum="10"
+            android:background="#ffffff">
 
             <TextView
                 android:layout_width="0dp"
@@ -200,6 +212,7 @@
                 android:textColor="@color/tieto_darkblue"
                 android:textSize="@dimen/schedule_icons" />
 
+            
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="0dp"
@@ -248,17 +261,18 @@
         android:layout_height="0dp"
         android:layout_weight="10"
         android:weightSum="10"
-        android:background="@drawable/all_around_stroke"
-        android:paddingLeft="@dimen/padding_left"
+        android:background="#000000"
         android:gravity="center_vertical"
-        android:id="@+id/ll_start_choose_program">
+        android:id="@+id/ll_start_choose_program"
+        android:padding="1dp">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="8"
             android:gravity="center_vertical"
-            >
+            android:paddingLeft="@dimen/padding_left"
+            android:background="#ffffff">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -273,7 +287,8 @@
             android:layout_height="fill_parent"
             android:layout_weight="2"
             android:id="@+id/ll_start_program_arrow"
-            android:gravity="center_vertical|right">
+            android:gravity="center_vertical|right"
+            android:background="#ffffff">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

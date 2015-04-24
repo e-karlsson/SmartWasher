@@ -13,6 +13,8 @@ import com.washer.smart.smartwasher.R;
 import org.apache.http.auth.NTUserPrincipal;
 import org.w3c.dom.Text;
 
+import java.util.Arrays;
+
 import extra.Timer;
 import extra.WasherInfo;
 
@@ -108,6 +110,7 @@ public class WasherProgramDialog extends CustomDialog {
         String[] programNames = WasherInfo.programNames;
         String[] degrees = WasherInfo.degreeNames;
 
+        Arrays.sort(programNames);
 
         programPicker.setMinValue(0);
         programPicker.setMaxValue(programNames.length -1);
