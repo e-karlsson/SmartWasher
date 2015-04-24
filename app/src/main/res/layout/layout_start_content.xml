@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="6.5"
                 android:gravity="center_vertical|right"
-                android:textColor="@color/text_color_light_gray"
+                android:textColor="@color/text_color_dark_gray"
                 android:text="idag, kl 17.45"
                 android:id="@+id/tv_start_time_description"
                 android:textSize="@dimen/text_size_description" />

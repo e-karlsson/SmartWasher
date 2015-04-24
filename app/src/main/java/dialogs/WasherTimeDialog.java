@@ -9,6 +9,10 @@ import android.widget.NumberPicker;
 
 import com.washer.smart.smartwasher.R;
 
+import java.util.Calendar;
+
+import extra.Timer;
+
 /**
  * Created by xxottosl on 2015-04-14.
  */
@@ -113,13 +117,16 @@ public class WasherTimeDialog extends CustomDialog {
     }
 
     private String[] generateDateStrings(){
-        int days = 365;
+        int days = 7;
         String[] dayStrings = new String[days];
         dayStrings[0] = "idag";
         dayStrings[1] = "imorgon";
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 2);
         for(int i = 2; i < days; i++){
-
-            dayStrings[i] = "om "+i+" dagar";
+            Timer.TimeInfo ti = Timer.translate(cal.getTimeInMillis());
+            dayStrings[i] = ti.getWTDDate();
+            cal.add(Calendar.DATE, 1);
         }
 
         return dayStrings;

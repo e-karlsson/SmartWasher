@@ -139,7 +139,7 @@ public class WasherService {
     public static void setSettings(boolean push, int reminderTime, boolean staticPrice, float price, CallBack<Status> callBack){
 
 
-        GetExecutor executor = new GetExecutor(baseUrl+"set/settings?push="+push+"&reminderTime="+reminderTime+"&static="+staticPrice+"&price="+price, callBack) {
+        GetExecutor executor = new GetExecutor(baseUrl+"set/settings?push="+(push?1:0)+"&reminderTime="+reminderTime+"&static="+(staticPrice?1:0)+"&price="+price, callBack) {
             @Override
             public Object parse(String json) throws Exception {
                 Status status = GetExecutor.getMapper().readValue(json, Status.class);

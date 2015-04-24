@@ -20,12 +20,34 @@ public class Timer {
         ti.setSecond(""+calendar.get(Calendar.SECOND));
         ti.monthNumber = calendar.get(Calendar.MONTH) + 1;
         ti.setWeek(calendar.get(Calendar.WEEK_OF_YEAR));
-
+        ti.setDayName(getDay(calendar.get(Calendar.DAY_OF_WEEK)));
 
         return ti;
 
     }
 
+
+    private static String getDay(int day){
+        switch (day) {
+            case 2:
+                return "Måndag";
+            case 3:
+                return "Tisdag";
+            case 4:
+                return "Onsdag";
+            case 5:
+                return "Torsdag";
+            case 6:
+                return "Fredag";
+            case 7:
+                return "Lördag";
+            case 1:
+                return "Söndag";
+        }
+            return "?";
+
+
+    }
     private static String getMonth(int month){
         switch (month) {
             case 0:
@@ -62,7 +84,7 @@ public class Timer {
     }
 
     public static class TimeInfo{
-        String month, day, hour, minute, second;
+        String month, day, hour, minute, second, dayName;
         int monthNumber;
         int week;
 
@@ -118,10 +140,20 @@ public class Timer {
             return second;
         }
 
+        public String getDayName() {
+            return dayName;
+        }
+
+        public void setDayName(String dayName) {
+            this.dayName = dayName;
+        }
+
         public void setSecond(String second) {
             this.second = makeTwo(second);
         }
-
+        public String getWTDDate(){
+            return dayName+" "+getDay()+"/"+(getMonthNumber()+1);
+        }
         @Override
         public String toString() {
             return day+" "+month+" "+hour+":"+minute;

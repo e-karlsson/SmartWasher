@@ -308,8 +308,8 @@ public class StartFragment extends BaseFragment {
                    // time = -1;
                     badTime = true;
                 }else{
-                    startTimeDescription.setTextColor(getResources().getColor(R.color.text_color_light_gray));
-                    startTimeTitle.setTextColor(getResources().getColor(R.color.text_color_light_gray));
+                    startTimeDescription.setTextColor(getResources().getColor(R.color.text_color_dark_gray));
+                    startTimeTitle.setTextColor(getResources().getColor(R.color.text_color_dark_gray));
                     badTime = false;
                 }
 
