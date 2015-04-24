@@ -91,7 +91,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
-                    android:text="Startar klockan "
+                    android:text="Färdig klockan"
                     android:id="@+id/textView13"
                     android:textSize="@dimen/start_detail_information"
                     android:textColor="@color/tieto_darkblue"

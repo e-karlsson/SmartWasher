@@ -12,6 +12,8 @@ import com.washer.smart.smartwasher.R;
 import org.apache.http.auth.NTUserPrincipal;
 import org.w3c.dom.Text;
 
+import java.util.Arrays;
+
 /**
  * Created by xxottosl on 2015-04-15.
  */
@@ -89,6 +91,7 @@ public class WasherProgramDialog extends CustomDialog {
         String[] programNames = new String[]{"Bomull","Ylle","Fintvätt","Snabbtvätt","Träningskläder","Handtvätt"};
         String[] degrees = new String[]{"20","30","40","60","95"};
 
+        Arrays.sort(programNames);
 
         programPicker.setMinValue(0);
         programPicker.setMaxValue(programNames.length -1);
