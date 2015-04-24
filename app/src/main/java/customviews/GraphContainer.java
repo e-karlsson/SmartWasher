@@ -87,7 +87,7 @@ public class GraphContainer extends LinearLayout {
     }
 
     private void createRightTags(Context context, GraphData data){
-        float highestPrice = data.getHighestPrice()*data.getScale();
+        float highestPrice = data.getHighestPrice();
         right.addView(rightTag(context, "Öre"));
         right.addView(rightTag(context, format(highestPrice)));
         right.addView(rightTag(context, format(highestPrice*0.75f)));
@@ -97,12 +97,29 @@ public class GraphContainer extends LinearLayout {
     }
 
     private void createBotTags(Context context, GraphData data){
-        bot.addView(botTag(context, "Datum"));
-        bot.addView(botTag(context, data.getDateAt(0f)));
-        bot.addView(botTag(context, data.getDateAt(0.25f)));
-        bot.addView(botTag(context, data.getDateAt(0.50f)));
-        bot.addView(botTag(context, data.getDateAt(0.75f)));
-        bot.addView(botTag(context, data.getDateAt(1f)));
+
+        if(data.isWeek()) {
+            bot.addView(botTag(context, "Datum"));
+            bot.addView(botTag(context, data.getDateAt(0f)));
+            bot.addView(botTag(context, data.getDateAt(0.25f)));
+            bot.addView(botTag(context, data.getDateAt(0.50f)));
+            bot.addView(botTag(context, data.getDateAt(0.75f)));
+            bot.addView(botTag(context, data.getDateAt(1f)));
+        }else if(data.isMonth()){
+            bot.addView(botTag(context, "Vecka"));
+            bot.addView(botTag(context, ""));
+            bot.addView(botTag(context, data.getWeekAt(0f)));
+            bot.addView(botTag(context, data.getWeekAt(0.33f)));
+            bot.addView(botTag(context, data.getWeekAt(0.66f)));
+            bot.addView(botTag(context, data.getWeekAt(1f)));
+        }else{
+            bot.addView(botTag(context, "Månad"));
+            bot.addView(botTag(context, ""));
+            bot.addView(botTag(context, data.getMonthAt(0f)));
+            bot.addView(botTag(context, data.getMonthAt(0.33f)));
+            bot.addView(botTag(context, data.getMonthAt(0.66f)));
+            bot.addView(botTag(context, data.getMonthAt(1f)));
+        }
     }
 
     private TextView botTag(Context context, String text){

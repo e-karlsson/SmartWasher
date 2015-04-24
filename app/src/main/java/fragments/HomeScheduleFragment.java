@@ -1,5 +1,7 @@
 package fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import java.util.Calendar;
 import extra.FontCache;
 import extra.LiveData;
 import extra.Timer;
+import extra.WasherInfo;
 import model.LiveRecord;
 import model.StartStatus;
 import model.Status;
@@ -60,10 +63,12 @@ public class HomeScheduleFragment extends BaseFragment {
                 Calendar rightNow = Calendar.getInstance();
                 long currentTime = rightNow.getTimeInMillis();
 
-                WasherService.startAt(currentTime, 45, programName, degreeName, new CallBack<StartStatus>() {
+                int washTime = WasherInfo.getWashTime(programName, degreeName);
+                WasherService.startAt(currentTime, washTime, programName, degreeName, new CallBack<StartStatus>() {
                     @Override
                     public void onSuccess(StartStatus startStatus) {
-                        MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_WASHING,false);
+                        LiveData.getLiveRecord().setProgramInfo(startStatus.getProgramInfo());
+                        MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_WASHING, false);
                     }
 
                     @Override
@@ -80,17 +85,7 @@ public class HomeScheduleFragment extends BaseFragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WasherService.stop(new CallBack<Status>() {
-                    @Override
-                    public void onSuccess(Status status) {
-                        MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SLEEP,false);
-                    }
-
-                    @Override
-                    public void onError(WasherError error) {
-                        Toast.makeText(getActivity(), "Kunde inte ansluta till servern!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+              showCancelDialog();
 
 
             }
@@ -158,6 +153,40 @@ public class HomeScheduleFragment extends BaseFragment {
     @Override
     public void update() {
         updateInfo();
+    }
+
+    private void showCancelDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Vill du verkligen avbryta schemaläggningen?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, int which) {
+                WasherService.stop(new CallBack<Status>() {
+                    @Override
+                    public void onSuccess(Status status) {
+                        MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SLEEP,false);
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError(WasherError error) {
+                        Toast.makeText(getActivity(), "Kunde inte ansluta till servern!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+
+                    }
+                });
+
+            }
+        });
+        builder.setNegativeButton("Nej", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public static BaseFragment create() {

@@ -1,14 +1,19 @@
 package fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.washer.smart.smartwasher.NavigationBar;
 import com.washer.smart.smartwasher.R;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
@@ -16,9 +21,13 @@ import dialogs.CustomDialog;
 import dialogs.WasherProgramDialog;
 import dialogs.WasherTimeDialog;
 import extra.FontCache;
+import extra.LiveData;
 import extra.MenuBar;
 import extra.Storage;
+import extra.WasherInfo;
+import model.LiveRecord;
 import model.StartStatus;
+import model.Status;
 import sdk.CallBack;
 import sdk.WasherError;
 import sdk.WasherService;
@@ -34,6 +43,8 @@ public class StartFragment extends BaseFragment {
     int minIndex;
     int programIndex = 0;
     int degreeIndex = 0;
+    int programTime;
+    boolean badTime = false;
 
     NavigationBar topStartBar;
     LinearLayout extraParams;
@@ -47,12 +58,17 @@ public class StartFragment extends BaseFragment {
 
 
 
+
     @Override
     protected void init(View view) {
         TextView startTimeFa = (TextView) view.findViewById(R.id.tv_start_time_fa);
         TextView startProgramFa = (TextView) view.findViewById(R.id.tv_start_program_fa);
+        TextView windIcon = (TextView) view.findViewById(R.id.tv_start_info_wind);
+        TextView priceIcon = (TextView) view.findViewById(R.id.tv_start_info_cheap);
         FontCache.setCustomFont(startProgramFa, getResources().getString(R.string.fa), getActivity());
         FontCache.setCustomFont(startTimeFa, getResources().getString(R.string.fa), getActivity());
+        FontCache.setCustomFont(windIcon, getResources().getString(R.string.fa), getActivity());
+        FontCache.setCustomFont(priceIcon, getResources().getString(R.string.fa), getActivity());
 
         topStartBar = NavigationBar.greenWhiteToggle(view);
         extraParams = (LinearLayout) view.findViewById(R.id.ll_extra_params);
@@ -65,6 +81,20 @@ public class StartFragment extends BaseFragment {
         chooseProgramDescription = (TextView) view.findViewById(R.id.tv_start_program);
         startTimeTitle = (TextView) view.findViewById(R.id.tv_start_time);
 
+
+        priceIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPriceInfo();
+            }
+        });
+
+        windIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showWindInfo();
+            }
+        });
 
 
         startChooseProgram.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +194,7 @@ public class StartFragment extends BaseFragment {
 
     private boolean validateFields(){
         boolean isOK = true;
-        if(time<0){
+        if(badTime){
             startTimeDescription.setTextColor(getResources().getColor(R.color.tieto_orange));
             startTimeTitle.setTextColor(getResources().getColor(R.color.tieto_orange));
 
@@ -181,7 +211,10 @@ public class StartFragment extends BaseFragment {
     CallBack<StartStatus> callback = new CallBack<StartStatus>() {
         @Override
         public void onSuccess(StartStatus status) {
-            Log.d("hej", "Great! Will start server!");
+
+
+            LiveData.getLiveRecord().setProgramInfo(status.getProgramInfo());
+            MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SCHEDULE,false);
         }
 
         @Override
@@ -194,14 +227,14 @@ public class StartFragment extends BaseFragment {
 
     private void onStartClick(){
         if(validateFields() == false) return;
-
+        programTime = WasherInfo.getWashTime(programName, degreeName);
         if(topStartBar.getSelectedId() == 0){
-            WasherService.startAt(time, 45, programName, degreeName, callback);
+            WasherService.startAt(time, programTime, programName, degreeName, callback);
         }else{
-            WasherService.startReadyAt(time, 45, programName, degreeName, priceSwitch.isChecked(), windSwitch.isChecked(), callback);
+            WasherService.startReadyAt(time, programTime, programName, degreeName, priceSwitch.isChecked(), windSwitch.isChecked(), callback);
         }
 
-        MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_SCHEDULE,false);
+
 
 
     }
@@ -239,6 +272,7 @@ public class StartFragment extends BaseFragment {
         degreeIndex = Storage.loadInt(Storage.LAST_DEGREE_ID, degreeIndex);
 
         wpd.show();
+        wpd.setStartTime(time, topStartBar.getSelectedId() == 1);
         wpd.setIds(programIndex, degreeIndex);
 
     }
@@ -269,11 +303,12 @@ public class StartFragment extends BaseFragment {
 
                 if((time-tempTime)<0){
                     startTimeDescription.setTextColor(getResources().getColor(R.color.tieto_orange));
-                    time = -1;
+                   // time = -1;
+                    badTime = true;
                 }else{
                     startTimeDescription.setTextColor(getResources().getColor(R.color.text_color_light_gray));
                     startTimeTitle.setTextColor(getResources().getColor(R.color.text_color_light_gray));
-
+                    badTime = false;
                 }
 
 
@@ -308,10 +343,34 @@ public class StartFragment extends BaseFragment {
 
     private void load(){
         topStartBar.loadState("StartTopBar");
-        programName = Storage.loadString(Storage.LAST_PROGRAM_STRING, "Välj program");
+        programName = Storage.loadString(Storage.LAST_PROGRAM_STRING, "Välj tvättprogram");
         degreeName = Storage.loadString(Storage.LAST_DEGREE_STRING,"");
         priceSwitch.setChecked(Storage.loadBoolean(Storage.CHEAP_PRICE, false));
         windSwitch.setChecked(Storage.loadBoolean(Storage.USE_WIND, false));
+    }
+
+    private void showPriceInfo(){
+        showDialog("Om billigast el", getResources().getString(R.string.price_info));
+    }
+
+    private void showWindInfo(){
+        showDialog("Om vindkraft",getResources().getString(R.string.wind_info));
+    }
+
+    private void showDialog(String title, String info) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(info);
+        builder.setTitle(title);
+        builder.setCancelable(true);
+        builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }
+        );
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 

@@ -13,7 +13,9 @@ import java.util.Calendar;
 
 import dialogs.CustomDialog;
 import dialogs.WasherProgramDialog;
+import extra.LiveData;
 import extra.Storage;
+import extra.WasherInfo;
 import model.StartStatus;
 import sdk.CallBack;
 import sdk.WasherError;
@@ -73,10 +75,11 @@ public class HomeSleepFragment extends BaseFragment {
 
                 Storage.saveInt(Storage.LAST_PROGRAM_ID, ids[0]);
                 Storage.saveInt(Storage.LAST_DEGREE_ID, ids[1]);
-
-                WasherService.startAt(currentTime, 1, programName, degreeName, new CallBack<StartStatus>() {
+                int washTime = WasherInfo.getWashTime(programName, degreeName);
+                WasherService.startAt(currentTime, washTime, programName, degreeName, new CallBack<StartStatus>() {
                     @Override
                     public void onSuccess(StartStatus startStatus) {
+                        LiveData.getLiveRecord().setProgramInfo(startStatus.getProgramInfo());
                         MyViewPager.getInstance().setCurrentItem(MyViewPager.HOME_WASHING, false);
                     }
 
@@ -102,6 +105,7 @@ public class HomeSleepFragment extends BaseFragment {
 
         int programIndex = Storage.loadInt(Storage.LAST_PROGRAM_ID, 0);
         int degreeIndex = Storage.loadInt(Storage.LAST_DEGREE_ID, 0);
+
 
         wpd.setIds(programIndex, degreeIndex);
 

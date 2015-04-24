@@ -30,7 +30,7 @@
         android:layout_height="0dp"
         android:layout_weight="8"
         android:weightSum="3"
-        android:background="@drawable/all_around_stroke"
+        android:background="#000"
         android:padding="1dp">
 
         <LinearLayout
@@ -100,21 +100,24 @@
         android:layout_height="0dp"
         android:layout_weight="15"
         android:weightSum="2"
-        android:background="@drawable/all_around_stroke"
-        android:padding="1dp"
-        android:gravity="center_vertical">
+        android:background="#000"
+        android:gravity="center_vertical"
+        android:paddingLeft="1dp"
+        android:paddingTop="0dp"
+        android:paddingRight="1dp"
+        android:paddingBottom="1dp">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:background="#fff">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="870 W"
                 android:id="@+id/tv_history_total_watt"
                 android:textSize="@dimen/history_current_value"/>
             </LinearLayout>
@@ -124,12 +127,12 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:background="#fff">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="58 Kr"
                 android:id="@+id/tv_history_total_cost"
                 android:textSize="@dimen/history_current_value"/>
         </LinearLayout>

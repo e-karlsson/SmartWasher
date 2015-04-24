@@ -15,6 +15,9 @@
     <string name="program_icon">\uf129</string>
     <string name="money_icon">\uf0d6</string>
     <string name="wind_icon">\uf06c</string>
+    <string name="info_icon">\uf05a</string>
 
+    <string name="wind_info">När tvättmaskinen får information av din elleverantör om att det är vindkraft som levereras kommer tvätten sättas på. Om ingen vindkraft blir tillgänglig fram till den tid du önskat tvätten att vara klar kommer tvättmaskinen startas oavsett. <b>Kan ej kombineras med Billigast el.</b></string>
+    <string name="price_info">Om du har rörligt elavtal kan du välja att tvätta när det är billigast el fram till den tid du önskar tvätten att vara klar. <b>Kan ej kombineras med Vind.</b> </string>
 
 </resources>

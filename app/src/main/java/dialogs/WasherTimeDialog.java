@@ -130,4 +130,6 @@ public class WasherTimeDialog extends CustomDialog {
         return ""+number;
     }
 
+
+
 }

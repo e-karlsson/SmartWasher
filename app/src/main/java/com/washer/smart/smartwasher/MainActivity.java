@@ -30,6 +30,7 @@ import dialogs.CustomDialog;
 import extra.FontCache;
 import extra.MenuBar;
 import extra.Storage;
+import extra.WasherInfo;
 import fragments.*;
 import model.LiveRecord;
 import sdk.CallBack;
@@ -51,6 +52,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GcmHandler.handle(this);
+        WasherInfo.init();
         init();
     }
 
@@ -92,12 +94,20 @@ public class MainActivity extends FragmentActivity {
         NavigationBar navbar = new NavigationBar() {
             @Override
             public void onActive(View v) {
-                v.setBackgroundColor(getResources().getColor(R.color.tieto_darkblue));
+                v.setBackgroundColor(getResources().getColor(R.color.tieto_green));
+                for(int i = 0; i < 2; ++i){
+                    TextView tv = (TextView) ((LinearLayout) v).getChildAt(i);
+                    tv.setTextColor(getResources().getColor(R.color.white));
+                }
             }
 
             @Override
             public void onInactive(View v) {
-                v.setBackgroundColor(getResources().getColor(R.color.tieto_green));
+                v.setBackgroundColor(getResources().getColor(R.color.white));
+                for(int i = 0; i < 2; ++i){
+                    TextView tv = (TextView) ((LinearLayout) v).getChildAt(i);
+                    tv.setTextColor(getResources().getColor(R.color.tieto_green));
+                }
             }
         };
 
@@ -133,6 +143,8 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
+        //set home as selected and update looks
+        navbar.setSelected(0);
 
     }
 

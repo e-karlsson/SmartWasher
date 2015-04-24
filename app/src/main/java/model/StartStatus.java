@@ -6,7 +6,7 @@ package model;
 public class StartStatus {
 
     String status;
-    long startAt;
+    ProgramInfo programInfo;
     float price;
 
     public String getStatus() {
@@ -17,12 +17,12 @@ public class StartStatus {
         this.status = status;
     }
 
-    public long getStartAt() {
-        return startAt;
+    public ProgramInfo getProgramInfo() {
+        return programInfo;
     }
 
-    public void setStartAt(long startAt) {
-        this.startAt = startAt;
+    public void setProgramInfo(ProgramInfo programInfo) {
+        this.programInfo = programInfo;
     }
 
     public float getPrice() {

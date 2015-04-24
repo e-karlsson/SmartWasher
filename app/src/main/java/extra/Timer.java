@@ -19,6 +19,7 @@ public class Timer {
         ti.setMinute(""+calendar.get(Calendar.MINUTE));
         ti.setSecond(""+calendar.get(Calendar.SECOND));
         ti.monthNumber = calendar.get(Calendar.MONTH) + 1;
+        ti.setWeek(calendar.get(Calendar.WEEK_OF_YEAR));
 
 
         return ti;
@@ -63,7 +64,15 @@ public class Timer {
     public static class TimeInfo{
         String month, day, hour, minute, second;
         int monthNumber;
+        int week;
 
+        public int getWeek() {
+            return week;
+        }
+
+        public void setWeek(int week) {
+            this.week = week;
+        }
 
         public String getMonth() {
             return month;

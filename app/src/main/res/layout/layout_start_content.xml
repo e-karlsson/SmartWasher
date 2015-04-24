@@ -141,13 +141,24 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:text="@string/info_icon"
+                android:id="@+id/tv_start_info_cheap"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/tieto_darkblue"
+                android:textSize="@dimen/schedule_icons" />
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="7"
+                android:layout_weight="6"
                 android:gravity="center_vertical"
-                android:paddingLeft="@dimen/padding_left">
+                android:paddingLeft="0dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -156,6 +167,7 @@
                     android:textSize="@dimen/tv_start_param"
                     android:textColor="@color/text_color_dark_gray" />
             </LinearLayout>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="0dp"
@@ -177,13 +189,24 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:text="@string/info_icon"
+                android:id="@+id/tv_start_info_wind"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/tieto_darkblue"
+                android:textSize="@dimen/schedule_icons" />
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="7"
+                android:layout_weight="6"
                 android:gravity="center_vertical"
-                android:paddingLeft="@dimen/padding_left">
+                android:paddingLeft="0dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -192,6 +215,7 @@
                     android:textSize="@dimen/tv_start_param"
                     android:textColor="@color/text_color_dark_gray" />
             </LinearLayout>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="0dp"
@@ -206,6 +230,7 @@
                     android:id="@+id/sw_start_wind"
                     android:checked="false"/>
             </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 
@@ -285,7 +310,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STARTA"
+                android:text="SPARA"
                 android:textSize="@dimen/button_text_size"
                 android:textColor="@color/button_text_color" />
         </LinearLayout>

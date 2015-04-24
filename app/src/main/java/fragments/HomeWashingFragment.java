@@ -12,6 +12,7 @@ import com.washer.smart.smartwasher.R;
 
 import java.util.Calendar;
 
+import extra.FontCache;
 import extra.LiveData;
 import extra.Timer;
 import model.LiveRecord;
@@ -35,6 +36,7 @@ public class HomeWashingFragment extends BaseFragment {
         extraName = (TextView) view.findViewById(R.id.tv_start_running_extra);
         timeDone = (TextView) view.findViewById(R.id.tv_start_running_ready_at);
         extraDescription = (TextView) view.findViewById(R.id.tv_start_running_extra_description);
+        FontCache.setCustomFont(extraDescription, getResources().getString(R.string.fa), getActivity());
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override

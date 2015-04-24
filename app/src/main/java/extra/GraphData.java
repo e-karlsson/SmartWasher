@@ -72,6 +72,19 @@ public class GraphData {
         return ti.getDay()+"/"+ti.getMonthNumber();
     }
 
+    public String getWeekAt(float percent){
+        Date date = dates.get((int) ((dates.size()-1)*percent)).date;
+        Timer.TimeInfo ti = Timer.translate(date.getTime());
+        return "v."+ti.getWeek();
+    }
+
+    public String getMonthAt(float percent){
+        Date date = dates.get((int) ((dates.size()-1)*percent)).date;
+        Timer.TimeInfo ti = Timer.translate(date.getTime());
+        return ti.getMonth();
+    }
+
+
     public float getScale() {
         return scale;
     }
